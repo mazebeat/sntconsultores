@@ -5,7 +5,7 @@
 			{{--BEGIN SLIDER 1--}}
 			<li data-transition="fade" data-slotamount="6" data-masterspeed="700">
 				{{--MAIN IMAGE - BACKGROUND--}}
-				@if(Config::get('slider.bgblur') == false)
+				@if(Config::get('slider.background-blur') == false)
 					{{ HTML::image('images/slider/slide1.jpg', '', array('data-bgfit'=>'cover', 'data-bgposition'=>'center top', 'data-bgrepeat'=>'no-repeat')) }}
 				@else
 					{{ HTML::image('images/slider/slide1_blur.jpg', '', array('data-bgfit'=>'cover', 'data-bgposition'=>'center top', 'data-bgrepeat'=>'no-repeat')) }}
@@ -15,15 +15,13 @@
 				     data-x="center" data-y="180" data-speed="200" data-start="0"
 				     data-easing="Power3.easeInOut"
 				     data-splitin="chars"
-				     data-splitout="none"
-				     data-elementdelay="0.03" data-endelementdelay="0.03" data-endspeed="200" style="z-index: 5; -webkit-transition: all 0s ease 0s; transition: all 0s ease 0s; min-height: 0px; min-width: 0px; line-height: 60px; border-width: 0px; margin: 0px; padding: 0px; letter-spacing: 1px; font-size: 70px; font-weight: 300; font-family: raleway; text-align:left; color: #ffffff;">{{ Config::get('slider.slider1.title1', '') }}</div>
+				     data-splitout="none" data-elementdelay="0.03" data-endelementdelay="0.03" data-endspeed="200" style="z-index: 5; -webkit-transition: all 0s ease 0s; transition: all 0s ease 0s; min-height: 0px; min-width: 0px; line-height: 60px; border-width: 0px; margin: 0px; padding: 0px; letter-spacing: 1px; font-size: 70px; font-weight: 300; font-family: raleway; text-align:left; color: #ffffff;">{{ Config::get('slider.slider1.title-1', '') }}</div>
 				{{--2. TITLE2--}}
 				<div class="tp-caption big_white customin randomrotateout tp-resizeme rs-parallaxlevel-10"
 				     data-x="center" data-y="240" data-speed="200" data-start="0"
 				     data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;transformPerspective:600;transformOrigin:50% 50%;"
 				     data-easing="Power3.easeInOut"
-				     data-splitin="chars"
-				     data-splitout="none" data-endspeed="1200" data-endeasing="Power3.easeIn" style="z-index: 5; -webkit-transition: all 0s ease 0s; transition: all 0s ease 0s; min-height: 0px; min-width: 0px; line-height: 60px; border-width: 0px; margin: 0px; padding: 0px; letter-spacing: 1px; font-size: 70px; font-family: raleway; text-align:left; font-weight:700; color: #ffffff;">{{ Config::get('slider.slider1.title2', '') }}</div>
+				     data-splitin="chars" data-splitout="none" data-endspeed="1200" data-endeasing="Power3.easeIn" style="z-index: 5; -webkit-transition: all 0s ease 0s; transition: all 0s ease 0s; min-height: 0px; min-width: 0px; line-height: 60px; border-width: 0px; margin: 0px; padding: 0px; letter-spacing: 1px; font-size: 70px; font-family: raleway; text-align:left; font-weight:700; color: #ffffff;">{{ Config::get('slider.slider1.title-2', '') }}</div>
 				{{--3. PENDRIVE--}}
 				<div class="tp-caption sfl stl start randomrotateout tp-resizeme rs-parallaxlevel-10"
 				     data-x="200" data-y="530" data-speed="300" data-start="0"
@@ -78,7 +76,7 @@
 			{{--BEGIN SLIDER 2--}}
 			<li data-transition="3dcurtain-vertical" data-slotamount="6" data-masterspeed="700">
 				{{--MAIN IMAGE - BACKGROUND--}}
-				@if(Config::get('slider.bgblur') == false)
+				@if(Config::get('slider.background-blur') == false)
 					{{ HTML::image('images/slider/slide2.jpg', '', array('data-bgfit'=>'cover', 'data-bgposition'=>'center top', 'data-bgrepeat'=>'no-repeat')) }}
 				@else
 					{{ HTML::image('images/slider/slide2_blur.jpg', '', array('data-bgfit'=>'cover', 'data-bgposition'=>'center top', 'data-bgrepeat'=>'no-repeat')) }}
@@ -86,7 +84,7 @@
 				{{--1. TITLE--}}
 				<div class="tp-caption black sft stb resizeme start" data-x="center" data-y="280" data-speed="300" data-start="1500"
 				     data-easing="Power1.easeIn" data-endspeed="300" data-endeasing="Power0.easeInOut" style="z-index: 6; -webkit-transition: all 0s ease 0s; transition: all 0s ease 0s; min-height: 0px; min-width: 0px; line-height: 60px; border-width: 0px; margin: 0px; padding: 0px; letter-spacing: 1px; font-size: 70px; font-weight: 300; font-family: raleway; text-align:left; color: #ffffff;">
-					<span style="font-weight:800">{{ Config::get('slider.slider2.title', '') }}</span></div>
+					<span style="font-weight:800">{{ Config::get('slider.slider2.title-1', '') }}</span></div>
 				{{--2. TEXT--}}
 				<div class="tp-caption large_bold_white ltl start" data-x="center" data-y="350" data-speed="1000" data-start="1800"
 					data-easing="Back.easeInuOt" data-endspeed="300" data-endeasing="Back.easeIn" style="z-index: 6; -webkit-transition: all 0s ease 0s; transition: all 0s ease 0s; min-height: 0px; min-width: 0px; line-height: 20px; border-width: 0px; margin: 0px; padding: 0px; letter-spacing: 1px; font-size: 15px; font-weight: 300; font-family: raleway; text-align:center; color:#f7f7f7; white-space: pre-wrap; width: 60%;">{{ Config::get('slider.slider2.text', '') }}</div>
@@ -101,7 +99,7 @@
 			{{--BEGIN SLIDER 3--}}
 			<li data-transition="3dcurtain-vertical" data-slotamount="6" data-masterspeed="700">
 				{{--MAIN IMAGE - BACKGROUND--}}
-				@if(Config::get('slider.bgblur') == false)
+				@if(Config::get('slider.background-blur') == false)
 					{{ HTML::image('images/slider/slide3.jpg', '', array('data-bgfit'=>'cover', 'data-bgposition'=>'center top', 'data-bgrepeat'=>'no-repeat')) }}
 				@else
 					{{ HTML::image('images/slider/slide3_blur.jpg', '', array('data-bgfit'=>'cover', 'data-bgposition'=>'center top', 'data-bgrepeat'=>'no-repeat')) }}
@@ -119,7 +117,7 @@
 				    data-y="245"
 				    data-speed="1000"
 				    data-start="600" data-easing="Back.easeInOut" data-endspeed="400" data-endeasing="Back.easeIn" style="z-index: 5; -webkit-transition: all 0s ease 0s; transition: all 0s ease 0s; min-height: 0px; min-width: 0px; line-height: 60px; border-width: 0px; margin: 0px; padding: 0px; letter-spacing: 1px; font-size: 54px; text-transform: uppercase; font-weight: 600; text-aligh:center; font-family: raleway; color:#fff; text-align:left; ">
-					<span style="font-weight:800">{{ Config::get('slider.slider3.title', '') }}</span></div>
+					<span style="font-weight:800">{{ Config::get('slider.slider3.title-1', '') }}</span></div>
 				{{--3. TEXT--}}
 				<div class="tp-caption large_bold_white ltl start"
 				     data-x="center"

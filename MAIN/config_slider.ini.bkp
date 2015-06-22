@@ -1,0 +1,24 @@
+; AUTHOR: Diego F.
+; PROJECT: SNT Consultores
+; DATE: 22/06/2015
+;
+; =============================================================
+;   Archivo de configuración para slider - SNT Consultores
+;		    Los comentarios empiezan con ";" o "#"
+; =============================================================
+;
+;; puede ser de tipo A, B o C
+;
+type = A
+bgblur = true
+[slider1]
+title1 = BIENVENIDOS A
+title2 = SNT CONSULTORES
+text =
+[slider2]
+title = PERFECCIÓN E INGENIO
+text = Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce elementum, nulla vel pellente consequat, ante nulla hendrerit arcu, ac tincidunt drerit arcu, ac tincidunt. Fusce elementum, nulla vel consequat.
+[slider3]
+subtitle = AYUDAMOS A QUE SU NEGOCIO CREZCA
+title = NEGOCIO \AMP INGENIERÍA
+text = Lorem ipsum dolor sit amet, consectetur adipiscing elit. Fusce elementum, nulla vel pellente consequat, ante nulla hendrerit arcu, ac tincidunt drerit arcu, ac tincidunt. Fusce elementum, nulla vel consequat.
