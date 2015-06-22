@@ -10,7 +10,7 @@
 var vision = {
     w: vision
 };
-vision.init = function() {
+vision.init = function () {
     'use strict';
 
     var $ = window.$;
@@ -24,7 +24,8 @@ vision.init = function() {
     var domready = false;
     var tram = window.tram;
     var Modernizr = window.Modernizr;
-    var noop = function() {};
+    var noop = function () {
+    };
     tram.config.hideBackface = false;
     tram.config.keepInherited = true;
 
@@ -33,7 +34,7 @@ vision.init = function() {
      * @param  {string} name
      * @param  {function} factory
      */
-    api.define = function(name, factory) {
+    api.define = function (name, factory) {
         var module = modules[name] = factory($, _);
         if (!module) return;
         // If running in vision app, subscribe to design/preview events
@@ -57,7 +58,7 @@ vision.init = function() {
      * @param  {string} name
      * @return {object}
      */
-    api.require = function(name) {
+    api.require = function (name) {
         return modules[name];
     };
 
@@ -65,7 +66,7 @@ vision.init = function() {
      * vision.push() - Add a ready handler into secondary queue
      * @param {function} ready  Callback to invoke on domready
      */
-    api.push = function(ready) {
+    api.push = function (ready) {
         // If domready has already happened, invoke handler
         if (domready) {
             $.isFunction(ready) && ready();
@@ -80,7 +81,7 @@ vision.init = function() {
      * @param {string} mode [optional]
      * @return {boolean}
      */
-    api.env = function(mode) {
+    api.env = function (mode) {
         var designFlag = window.__wf_design;
         var inApp = typeof designFlag != 'undefined';
         if (!mode) return inApp;
@@ -101,7 +102,7 @@ vision.init = function() {
     // Maintain current touch target to prevent late clicks on touch devices
     var touchTarget;
     // Listen for both events to support touch/mouse hybrid devices
-    touch && $doc.on('touchstart mousedown', function(evt) {
+    touch && $doc.on('touchstart mousedown', function (evt) {
         touchTarget = evt.target;
     });
 
@@ -110,9 +111,9 @@ vision.init = function() {
      * @param  {HTMLElement} clickTarget  Element being clicked
      * @return {Boolean}  True if click target is valid (always true on non-touch)
      */
-    api.validClick = touch ? function(clickTarget) {
+    api.validClick = touch ? function (clickTarget) {
         return clickTarget === touchTarget || $.contains(clickTarget, touchTarget);
-    } : function() {
+    } : function () {
         return true;
     };
 
@@ -131,8 +132,8 @@ vision.init = function() {
         // Set up throttled method (using custom frame-based _.throttle)
         var handlers = [];
         var proxy = {};
-        proxy.up = _.throttle(function(evt) {
-            _.each(handlers, function(h) {
+        proxy.up = _.throttle(function (evt) {
+            _.each(handlers, function (h) {
                 h(evt);
             });
         });
@@ -144,7 +145,7 @@ vision.init = function() {
          * Add an event handler
          * @param  {function} handler
          */
-        proxy.on = function(handler) {
+        proxy.on = function (handler) {
             if (typeof handler != 'function') return;
             if (_.contains(handlers, handler)) return;
             handlers.push(handler);
@@ -154,8 +155,8 @@ vision.init = function() {
          * Remove an event handler
          * @param  {function} handler
          */
-        proxy.off = function(handler) {
-            handlers = _.filter(handlers, function(h) {
+        proxy.off = function (handler) {
+            handlers = _.filter(handlers, function (h) {
                 return h !== handler;
             });
         };
@@ -163,17 +164,17 @@ vision.init = function() {
     }
 
     // Provide optional IX events to components
-    api.ixEvents = function() {
+    api.ixEvents = function () {
         var ix = api.require('ix');
         return (ix && ix.events) || {
-            reset: noop,
-            intro: noop,
-            outro: noop
-        };
+                reset: noop,
+                intro: noop,
+                outro: noop
+            };
     };
 
     // vision.location() - Wrap window.location in api
-    api.location = function(url) {
+    api.location = function (url) {
         window.location = url;
     };
 
@@ -184,12 +185,12 @@ vision.init = function() {
         // Trigger redraw for specific elements
         var Event = window.Event;
         var redraw = new Event('__wf_redraw');
-        api.app.redrawElement = function(i, el) {
+        api.app.redrawElement = function (i, el) {
             el.dispatchEvent(redraw);
         };
 
         // vision.location - Re-route location change to trigger an event
-        api.location = function(url) {
+        api.location = function (url) {
             window.dispatchEvent(new CustomEvent('__wf_location', {
                 detail: url
             }));
@@ -197,9 +198,9 @@ vision.init = function() {
     }
 
     // vision.ready() - Call primary and secondary handlers
-    api.ready = function() {
+    api.ready = function () {
         domready = true;
-        $.each(primary.concat(secondary), function(index, value) {
+        $.each(primary.concat(secondary), function (index, value) {
             $.isFunction(value) && value();
         });
         // Trigger resize
@@ -211,7 +212,7 @@ vision.init = function() {
      * @param  {function} handler
      */
     var deferLoad;
-    api.load = function(handler) {
+    api.load = function (handler) {
         deferLoad.then(handler);
     };
 
@@ -227,7 +228,7 @@ vision.init = function() {
     }
 
     // vision.destroy() - Trigger a cleanup event for all modules
-    api.destroy = function() {
+    api.destroy = function () {
         $win.triggerHandler('__wf_destroy');
         // If load event has not yet fired, replace the deferred
         if (deferLoad.state() == 'pending') bindLoad();
@@ -275,7 +276,7 @@ vision.init = function() {
 
         // Create quick reference variables for speed access to core prototypes.
         var
-        push = ArrayProto.push,
+            push = ArrayProto.push,
             slice = ArrayProto.slice,
             concat = ArrayProto.concat,
             toString = ObjProto.toString,
@@ -284,7 +285,7 @@ vision.init = function() {
         // All **ECMAScript 5** native function implementations that we hope to use
         // are declared here.
         var
-        nativeForEach = ArrayProto.forEach,
+            nativeForEach = ArrayProto.forEach,
             nativeMap = ArrayProto.map,
             nativeReduce = ArrayProto.reduce,
             nativeReduceRight = ArrayProto.reduceRight,
@@ -303,7 +304,7 @@ vision.init = function() {
         // The cornerstone, an `each` implementation, aka `forEach`.
         // Handles objects with the built-in `forEach`, arrays, and raw objects.
         // Delegates to **ECMAScript 5**'s native `forEach` if available.
-        var each = _.each = _.forEach = function(obj, iterator, context) {
+        var each = _.each = _.forEach = function (obj, iterator, context) {
             /* jshint shadow:true */
             if (obj == null) return obj;
             if (nativeForEach && obj.forEach === nativeForEach) {
@@ -323,20 +324,20 @@ vision.init = function() {
 
         // Return the results of applying the iterator to each element.
         // Delegates to **ECMAScript 5**'s native `map` if available.
-        _.map = _.collect = function(obj, iterator, context) {
+        _.map = _.collect = function (obj, iterator, context) {
             var results = [];
             if (obj == null) return results;
             if (nativeMap && obj.map === nativeMap) return obj.map(iterator, context);
-            each(obj, function(value, index, list) {
+            each(obj, function (value, index, list) {
                 results.push(iterator.call(context, value, index, list));
             });
             return results;
         };
 
         // Return the first value which passes a truth test. Aliased as `detect`.
-        _.find = _.detect = function(obj, predicate, context) {
+        _.find = _.detect = function (obj, predicate, context) {
             var result;
-            any(obj, function(value, index, list) {
+            any(obj, function (value, index, list) {
                 if (predicate.call(context, value, index, list)) {
                     result = value;
                     return true;
@@ -348,11 +349,11 @@ vision.init = function() {
         // Return all the elements that pass a truth test.
         // Delegates to **ECMAScript 5**'s native `filter` if available.
         // Aliased as `select`.
-        _.filter = _.select = function(obj, predicate, context) {
+        _.filter = _.select = function (obj, predicate, context) {
             var results = [];
             if (obj == null) return results;
             if (nativeFilter && obj.filter === nativeFilter) return obj.filter(predicate, context);
-            each(obj, function(value, index, list) {
+            each(obj, function (value, index, list) {
                 if (predicate.call(context, value, index, list)) results.push(value);
             });
             return results;
@@ -361,12 +362,12 @@ vision.init = function() {
         // Determine if at least one element in the object matches a truth test.
         // Delegates to **ECMAScript 5**'s native `some` if available.
         // Aliased as `any`.
-        var any = _.some = _.any = function(obj, predicate, context) {
+        var any = _.some = _.any = function (obj, predicate, context) {
             predicate || (predicate = _.identity);
             var result = false;
             if (obj == null) return result;
             if (nativeSome && obj.some === nativeSome) return obj.some(predicate, context);
-            each(obj, function(value, index, list) {
+            each(obj, function (value, index, list) {
                 if (result || (result = predicate.call(context, value, index, list))) return breaker;
             });
             return !!result;
@@ -374,10 +375,10 @@ vision.init = function() {
 
         // Determine if the array or object contains a given value (using `===`).
         // Aliased as `include`.
-        _.contains = _.include = function(obj, target) {
+        _.contains = _.include = function (obj, target) {
             if (obj == null) return false;
             if (nativeIndexOf && obj.indexOf === nativeIndexOf) return obj.indexOf(target) != -1;
-            return any(obj, function(value) {
+            return any(obj, function (value) {
                 return value === target;
             });
         };
@@ -387,29 +388,29 @@ vision.init = function() {
 
         // Delays a function for the given number of milliseconds, and then calls
         // it with the arguments supplied.
-        _.delay = function(func, wait) {
+        _.delay = function (func, wait) {
             var args = slice.call(arguments, 2);
-            return setTimeout(function() {
+            return setTimeout(function () {
                 return func.apply(null, args);
             }, wait);
         };
 
         // Defers a function, scheduling it to run after the current call stack has
         // cleared.
-        _.defer = function(func) {
+        _.defer = function (func) {
             return _.delay.apply(_, [func, 1].concat(slice.call(arguments, 1)));
         };
 
         // Returns a function, that, when invoked, will only be triggered once every
         // browser animation frame - using tram's requestAnimationFrame polyfill.
-        _.throttle = function(func) {
+        _.throttle = function (func) {
             var wait, args, context;
-            return function() {
+            return function () {
                 if (wait) return;
                 wait = true;
                 args = arguments;
                 context = this;
-                tram.frame(function() {
+                tram.frame(function () {
                     wait = false;
                     func.apply(context, args);
                 });
@@ -420,10 +421,10 @@ vision.init = function() {
         // be triggered. The function will be called after it stops being called for
         // N milliseconds. If `immediate` is passed, trigger the function on the
         // leading edge, instead of the trailing.
-        _.debounce = function(func, wait, immediate) {
+        _.debounce = function (func, wait, immediate) {
             var timeout, args, context, timestamp, result;
 
-            var later = function() {
+            var later = function () {
                 var last = _.now() - timestamp;
                 if (last < wait) {
                     timeout = setTimeout(later, wait - last);
@@ -436,7 +437,7 @@ vision.init = function() {
                 }
             };
 
-            return function() {
+            return function () {
                 context = this;
                 args = arguments;
                 timestamp = _.now();
@@ -458,7 +459,7 @@ vision.init = function() {
 
         // Retrieve the names of an object's properties.
         // Delegates to **ECMAScript 5**'s native `Object.keys`
-        _.keys = function(obj) {
+        _.keys = function (obj) {
             if (!_.isObject(obj)) return [];
             if (nativeKeys) return nativeKeys(obj);
             var keys = [];
@@ -469,12 +470,12 @@ vision.init = function() {
 
         // Shortcut function for checking if an object has a given property directly
         // on itself (in other words, not on a prototype).
-        _.has = function(obj, key) {
+        _.has = function (obj, key) {
             return hasOwnProperty.call(obj, key);
         };
 
         // Is a given variable an object?
-        _.isObject = function(obj) {
+        _.isObject = function (obj) {
             return obj === Object(obj);
         };
 
@@ -482,7 +483,7 @@ vision.init = function() {
         // -----------------
 
         // A (possibly faster) way to get the current timestamp as an integer.
-        _.now = Date.now || function() {
+        _.now = Date.now || function () {
             return new Date().getTime();
         };
 
@@ -504,14 +505,14 @@ vision.init = function() {
  * https://github.com/bkwld/tram
  * MIT License
  */
-window.tram = function(a) {
+window.tram = function (a) {
     function b(a, b) {
         var c = new L.Bare;
         return c.init(a, b)
     }
 
     function c(a) {
-        return a.replace(/[A-Z]/g, function(a) {
+        return a.replace(/[A-Z]/g, function (a) {
             return "-" + a.toLowerCase()
         })
     }
@@ -528,7 +529,8 @@ window.tram = function(a) {
         return "#" + (1 << 24 | a << 16 | b << 8 | c).toString(16).slice(1)
     }
 
-    function f() {}
+    function f() {
+    }
 
     function g(a, b) {
         _("Type warning: Expected: [" + a + "] Got: [" + typeof b + "] " + b)
@@ -551,188 +553,193 @@ window.tram = function(a) {
         }
         return d
     }
-    var k = function(a, b, c) {
-        function d(a) {
-            return "object" == typeof a
-        }
 
-        function e(a) {
-            return "function" == typeof a
-        }
-
-        function f() {}
-
-        function g(h, i) {
-            function j() {
-                var a = new k;
-                return e(a.init) && a.init.apply(a, arguments), a
+    var k = function (a, b, c) {
+            function d(a) {
+                return "object" == typeof a
             }
 
-            function k() {}
-            i === c && (i = h, h = Object), j.Bare = k;
-            var l, m = f[a] = h[a],
-                n = k[a] = j[a] = new f;
-            return n.constructor = j, j.mixin = function(b) {
-                return k[a] = j[a] = g(j, b)[a], j
-            }, j.open = function(a) {
-                if (l = {}, e(a) ? l = a.call(j, n, m, j, h) : d(a) && (l = a), d(l))
-                    for (var c in l) b.call(l, c) && (n[c] = l[c]);
-                return e(n.init) || (n.init = h), j
-            }, j.open(i)
-        }
-        return g
-    }("prototype", {}.hasOwnProperty),
+            function e(a) {
+                return "function" == typeof a
+            }
+
+            function f() {
+            }
+
+            function g(h, i) {
+                function j() {
+                    var a = new k;
+                    return e(a.init) && a.init.apply(a, arguments), a
+                }
+
+                function k() {
+                }
+
+                i === c && (i = h, h = Object), j.Bare = k;
+                var l, m = f[a] = h[a],
+                    n = k[a] = j[a] = new f;
+                return n.constructor = j, j.mixin = function (b) {
+                    return k[a] = j[a] = g(j, b)[a], j
+                }, j.open = function (a) {
+                    if (l = {}, e(a) ? l = a.call(j, n, m, j, h) : d(a) && (l = a), d(l))
+                        for (var c in l) b.call(l, c) && (n[c] = l[c]);
+                    return e(n.init) || (n.init = h), j
+                }, j.open(i)
+            }
+
+            return g
+        }("prototype", {}.hasOwnProperty),
         l = {
             ease: ["ease",
-                function(a, b, c, d) {
+                function (a, b, c, d) {
                     var e = (a /= d) * a,
                         f = e * a;
                     return b + c * (-2.75 * f * e + 11 * e * e + -15.5 * f + 8 * e + .25 * a)
                 }
             ],
             "ease-in": ["ease-in",
-                function(a, b, c, d) {
+                function (a, b, c, d) {
                     var e = (a /= d) * a,
                         f = e * a;
                     return b + c * (-1 * f * e + 3 * e * e + -3 * f + 2 * e)
                 }
             ],
             "ease-out": ["ease-out",
-                function(a, b, c, d) {
+                function (a, b, c, d) {
                     var e = (a /= d) * a,
                         f = e * a;
                     return b + c * (.3 * f * e + -1.6 * e * e + 2.2 * f + -1.8 * e + 1.9 * a)
                 }
             ],
             "ease-in-out": ["ease-in-out",
-                function(a, b, c, d) {
+                function (a, b, c, d) {
                     var e = (a /= d) * a,
                         f = e * a;
                     return b + c * (2 * f * e + -5 * e * e + 2 * f + 2 * e)
                 }
             ],
             linear: ["linear",
-                function(a, b, c, d) {
+                function (a, b, c, d) {
                     return c * a / d + b
                 }
             ],
             "ease-in-quad": ["cubic-bezier(0.550, 0.085, 0.680, 0.530)",
-                function(a, b, c, d) {
+                function (a, b, c, d) {
                     return c * (a /= d) * a + b
                 }
             ],
             "ease-out-quad": ["cubic-bezier(0.250, 0.460, 0.450, 0.940)",
-                function(a, b, c, d) {
+                function (a, b, c, d) {
                     return -c * (a /= d) * (a - 2) + b
                 }
             ],
             "ease-in-out-quad": ["cubic-bezier(0.455, 0.030, 0.515, 0.955)",
-                function(a, b, c, d) {
+                function (a, b, c, d) {
                     return (a /= d / 2) < 1 ? c / 2 * a * a + b : -c / 2 * (--a * (a - 2) - 1) + b
                 }
             ],
             "ease-in-cubic": ["cubic-bezier(0.550, 0.055, 0.675, 0.190)",
-                function(a, b, c, d) {
+                function (a, b, c, d) {
                     return c * (a /= d) * a * a + b
                 }
             ],
             "ease-out-cubic": ["cubic-bezier(0.215, 0.610, 0.355, 1)",
-                function(a, b, c, d) {
+                function (a, b, c, d) {
                     return c * ((a = a / d - 1) * a * a + 1) + b
                 }
             ],
             "ease-in-out-cubic": ["cubic-bezier(0.645, 0.045, 0.355, 1)",
-                function(a, b, c, d) {
+                function (a, b, c, d) {
                     return (a /= d / 2) < 1 ? c / 2 * a * a * a + b : c / 2 * ((a -= 2) * a * a + 2) + b
                 }
             ],
             "ease-in-quart": ["cubic-bezier(0.895, 0.030, 0.685, 0.220)",
-                function(a, b, c, d) {
+                function (a, b, c, d) {
                     return c * (a /= d) * a * a * a + b
                 }
             ],
             "ease-out-quart": ["cubic-bezier(0.165, 0.840, 0.440, 1)",
-                function(a, b, c, d) {
+                function (a, b, c, d) {
                     return -c * ((a = a / d - 1) * a * a * a - 1) + b
                 }
             ],
             "ease-in-out-quart": ["cubic-bezier(0.770, 0, 0.175, 1)",
-                function(a, b, c, d) {
+                function (a, b, c, d) {
                     return (a /= d / 2) < 1 ? c / 2 * a * a * a * a + b : -c / 2 * ((a -= 2) * a * a * a - 2) + b
                 }
             ],
             "ease-in-quint": ["cubic-bezier(0.755, 0.050, 0.855, 0.060)",
-                function(a, b, c, d) {
+                function (a, b, c, d) {
                     return c * (a /= d) * a * a * a * a + b
                 }
             ],
             "ease-out-quint": ["cubic-bezier(0.230, 1, 0.320, 1)",
-                function(a, b, c, d) {
+                function (a, b, c, d) {
                     return c * ((a = a / d - 1) * a * a * a * a + 1) + b
                 }
             ],
             "ease-in-out-quint": ["cubic-bezier(0.860, 0, 0.070, 1)",
-                function(a, b, c, d) {
+                function (a, b, c, d) {
                     return (a /= d / 2) < 1 ? c / 2 * a * a * a * a * a + b : c / 2 * ((a -= 2) * a * a * a * a + 2) + b
                 }
             ],
             "ease-in-sine": ["cubic-bezier(0.470, 0, 0.745, 0.715)",
-                function(a, b, c, d) {
+                function (a, b, c, d) {
                     return -c * Math.cos(a / d * (Math.PI / 2)) + c + b
                 }
             ],
             "ease-out-sine": ["cubic-bezier(0.390, 0.575, 0.565, 1)",
-                function(a, b, c, d) {
+                function (a, b, c, d) {
                     return c * Math.sin(a / d * (Math.PI / 2)) + b
                 }
             ],
             "ease-in-out-sine": ["cubic-bezier(0.445, 0.050, 0.550, 0.950)",
-                function(a, b, c, d) {
+                function (a, b, c, d) {
                     return -c / 2 * (Math.cos(Math.PI * a / d) - 1) + b
                 }
             ],
             "ease-in-expo": ["cubic-bezier(0.950, 0.050, 0.795, 0.035)",
-                function(a, b, c, d) {
+                function (a, b, c, d) {
                     return 0 === a ? b : c * Math.pow(2, 10 * (a / d - 1)) + b
                 }
             ],
             "ease-out-expo": ["cubic-bezier(0.190, 1, 0.220, 1)",
-                function(a, b, c, d) {
+                function (a, b, c, d) {
                     return a === d ? b + c : c * (-Math.pow(2, -10 * a / d) + 1) + b
                 }
             ],
             "ease-in-out-expo": ["cubic-bezier(1, 0, 0, 1)",
-                function(a, b, c, d) {
+                function (a, b, c, d) {
                     return 0 === a ? b : a === d ? b + c : (a /= d / 2) < 1 ? c / 2 * Math.pow(2, 10 * (a - 1)) + b : c / 2 * (-Math.pow(2, -10 * --a) + 2) + b
                 }
             ],
             "ease-in-circ": ["cubic-bezier(0.600, 0.040, 0.980, 0.335)",
-                function(a, b, c, d) {
+                function (a, b, c, d) {
                     return -c * (Math.sqrt(1 - (a /= d) * a) - 1) + b
                 }
             ],
             "ease-out-circ": ["cubic-bezier(0.075, 0.820, 0.165, 1)",
-                function(a, b, c, d) {
+                function (a, b, c, d) {
                     return c * Math.sqrt(1 - (a = a / d - 1) * a) + b
                 }
             ],
             "ease-in-out-circ": ["cubic-bezier(0.785, 0.135, 0.150, 0.860)",
-                function(a, b, c, d) {
+                function (a, b, c, d) {
                     return (a /= d / 2) < 1 ? -c / 2 * (Math.sqrt(1 - a * a) - 1) + b : c / 2 * (Math.sqrt(1 - (a -= 2) * a) + 1) + b
                 }
             ],
             "ease-in-back": ["cubic-bezier(0.600, -0.280, 0.735, 0.045)",
-                function(a, b, c, d, e) {
+                function (a, b, c, d, e) {
                     return void 0 === e && (e = 1.70158), c * (a /= d) * a * ((e + 1) * a - e) + b
                 }
             ],
             "ease-out-back": ["cubic-bezier(0.175, 0.885, 0.320, 1.275)",
-                function(a, b, c, d, e) {
+                function (a, b, c, d, e) {
                     return void 0 === e && (e = 1.70158), c * ((a = a / d - 1) * a * ((e + 1) * a + e) + 1) + b
                 }
             ],
             "ease-in-out-back": ["cubic-bezier(0.680, -0.550, 0.265, 1.550)",
-                function(a, b, c, d, e) {
+                function (a, b, c, d, e) {
                     return void 0 === e && (e = 1.70158), (a /= d / 2) < 1 ? c / 2 * a * a * (((e *= 1.525) + 1) * a - e) + b : c / 2 * ((a -= 2) * a * (((e *= 1.525) + 1) * a + e) + 2) + b
                 }
             ]
@@ -757,7 +764,7 @@ window.tram = function(a) {
         B = n.createElement("a"),
         C = ["Webkit", "Moz", "O", "ms"],
         D = ["-webkit-", "-moz-", "-o-", "-ms-"],
-        E = function(a) {
+        E = function (a) {
             if (a in B.style) return {
                 dom: a,
                 css: a
@@ -782,20 +789,20 @@ window.tram = function(a) {
         if (B.style[G] = l["ease-in-back"][0], !B.style[G])
             for (var H in m) l[H][0] = m[H]
     }
-    var I = b.frame = function() {
-        var a = o.requestAnimationFrame || o.webkitRequestAnimationFrame || o.mozRequestAnimationFrame || o.oRequestAnimationFrame || o.msRequestAnimationFrame;
-        return a && F.bind ? a.bind(o) : function(a) {
-            o.setTimeout(a, 16)
-        }
-    }(),
-        J = b.now = function() {
+    var I = b.frame = function () {
+            var a = o.requestAnimationFrame || o.webkitRequestAnimationFrame || o.mozRequestAnimationFrame || o.oRequestAnimationFrame || o.msRequestAnimationFrame;
+            return a && F.bind ? a.bind(o) : function (a) {
+                o.setTimeout(a, 16)
+            }
+        }(),
+        J = b.now = function () {
             var a = o.performance,
                 b = a && (a.now || a.webkitNow || a.msNow || a.mozNow);
-            return b && F.bind ? b.bind(a) : Date.now || function() {
+            return b && F.bind ? b.bind(a) : Date.now || function () {
                 return +new Date
             }
         }(),
-        K = k(function(b) {
+        K = k(function (b) {
             function d(a, b) {
                 var c = j(("" + a).split(A)),
                     d = c[0];
@@ -836,9 +843,9 @@ window.tram = function(a) {
                     if ("function" == e) return void a.call(this, this);
                     if ("object" == e) {
                         var f = 0;
-                        t.call(this, a, function(a, b) {
+                        t.call(this, a, function (a, b) {
                             a.span > f && (f = a.span), a.stop(), a.animate(b)
-                        }, function(a) {
+                        }, function (a) {
                             "wait" in a && (f = i(a.wait, 0))
                         }), s.call(this), f > 0 && (this.timer = new R({
                             duration: f,
@@ -847,8 +854,8 @@ window.tram = function(a) {
                         var g = this,
                             j = !1,
                             l = {};
-                        I(function() {
-                            t.call(g, a, function(a) {
+                        I(function () {
+                            t.call(g, a, function (a) {
                                 a.active && (j = !0, l[a.name] = a.nextStyle)
                             }), j && g.$el.css(l)
                         })
@@ -940,7 +947,7 @@ window.tram = function(a) {
             }
 
             function x(a, c) {
-                b[a] = function() {
+                b[a] = function () {
                     return this.children ? z.call(this, c, arguments) : (this.el && c.apply(this, arguments), this)
                 }
             }
@@ -950,7 +957,8 @@ window.tram = function(a) {
                 for (c = 0; d > c; c++) a.apply(this.children[c], b);
                 return this
             }
-            b.init = function(b) {
+
+            b.init = function (b) {
                 if (this.$el = a(b), this.el = this.$el[0], this.props = {}, this.queue = [], this.style = "", this.active = !1, T.keepInherited && !T.fallback) {
                     var c = V(this.el, "transition");
                     c && !y.test(c) && (this.upstream = c)
@@ -958,22 +966,23 @@ window.tram = function(a) {
                 F.backface && T.hideBackface && U(this.el, F.backface.css, "hidden")
             }, x("add", d), x("start", e), x("wait", f), x("then", g), x("next", h), x("stop", k), x("set", l), x("show", m), x("hide", n), x("redraw", o), x("destroy", q)
         }),
-        L = k(K, function(b) {
+        L = k(K, function (b) {
             function c(b, c) {
                 var d = a.data(b, p) || a.data(b, p, new K.Bare);
                 return d.el || d.init(b), c ? d.start(c) : d
             }
-            b.init = function(b, d) {
+
+            b.init = function (b, d) {
                 var e = a(b);
                 if (!e.length) return this;
                 if (1 === e.length) return c(e[0], d);
                 var f = [];
-                return e.each(function(a, b) {
+                return e.each(function (a, b) {
                     f.push(c(b, d))
                 }), this.children = f, this
             }
         }),
-        M = k(function(a) {
+        M = k(function (a) {
             function b() {
                 var a = this.get();
                 this.update("auto");
@@ -989,20 +998,21 @@ window.tram = function(a) {
                 var b = /rgba?\((\d+),\s*(\d+),\s*(\d+)/.exec(a);
                 return (b ? e(b[1], b[2], b[3]) : a).replace(/#(\w)(\w)(\w)$/, "#$1$1$2$2$3$3")
             }
+
             var f = {
                 duration: 500,
                 ease: "ease",
                 delay: 0
             };
-            a.init = function(a, b, d, e) {
+            a.init = function (a, b, d, e) {
                 this.$el = a, this.el = a[0];
                 var g = b[0];
                 d[2] && (g = d[2]), W[g] && (g = W[g]), this.name = g, this.type = d[1], this.duration = i(b[1], this.duration, f.duration), this.ease = c(b[2], this.ease, f.ease), this.delay = i(b[3], this.delay, f.delay), this.span = this.duration + this.delay, this.active = !1, this.nextStyle = null, this.auto = z.test(this.name), this.unit = e.unit || this.unit || T.defaultUnit, this.angle = e.angle || this.angle || T.defaultAngle, T.fallback || e.fallback ? this.animate = this.fallback : (this.animate = this.transition, this.string = this.name + A + this.duration + "ms" + ("ease" != this.ease ? A + l[this.ease][0] : "") + (this.delay ? A + this.delay + "ms" : ""))
-            }, a.set = function(a) {
+            }, a.set = function (a) {
                 a = this.convert(a, this.type), this.update(a), this.redraw()
-            }, a.transition = function(a) {
+            }, a.transition = function (a) {
                 this.active = !0, a = this.convert(a, this.type), this.auto && ("auto" == this.el.style[this.name] && (this.update(this.get()), this.redraw()), "auto" == a && (a = b.call(this))), this.nextStyle = a
-            }, a.fallback = function(a) {
+            }, a.fallback = function (a) {
                 var c = this.el.style[this.name] || this.convert(this.get(), this.type);
                 a = this.convert(a, this.type), this.auto && ("auto" == c && (c = this.convert(this.get(), this.type)), "auto" == a && (a = b.call(this))), this.tween = new Q({
                     from: c,
@@ -1013,15 +1023,15 @@ window.tram = function(a) {
                     update: this.update,
                     context: this
                 })
-            }, a.get = function() {
+            }, a.get = function () {
                 return V(this.el, this.name)
-            }, a.update = function(a) {
+            }, a.update = function (a) {
                 U(this.el, this.name, a)
-            }, a.stop = function() {
+            }, a.stop = function () {
                 (this.active || this.nextStyle) && (this.active = !1, this.nextStyle = null, U(this.el, this.name, this.get()));
                 var a = this.tween;
                 a && a.context && a.destroy()
-            }, a.convert = function(a, b) {
+            }, a.convert = function (a, b) {
                 if ("auto" == a && this.auto) return a;
                 var c, e = "number" == typeof a,
                     f = "string" == typeof a;
@@ -1059,36 +1069,37 @@ window.tram = function(a) {
                         c = "number(unitless) or string(unit or %)"
                 }
                 return g(c, a), a
-            }, a.redraw = function() {
+            }, a.redraw = function () {
                 this.el.offsetHeight
             }
         }),
-        N = k(M, function(a, b) {
-            a.init = function() {
+        N = k(M, function (a, b) {
+            a.init = function () {
                 b.init.apply(this, arguments), this.original || (this.original = this.convert(this.get(), t))
             }
         }),
-        O = k(M, function(a, b) {
-            a.init = function() {
+        O = k(M, function (a, b) {
+            a.init = function () {
                 b.init.apply(this, arguments), this.animate = this.fallback
-            }, a.get = function() {
+            }, a.get = function () {
                 return this.$el[this.name]()
-            }, a.update = function(a) {
+            }, a.update = function (a) {
                 this.$el[this.name](a)
             }
         }),
-        P = k(M, function(a, b) {
+        P = k(M, function (a, b) {
             function c(a, b) {
                 var c, d, e, f, g;
                 for (c in a) f = Y[c], e = f[0], d = f[1] || c, g = this.convert(a[c], e), b.call(this, d, g, e)
             }
-            a.init = function() {
+
+            a.init = function () {
                 b.init.apply(this, arguments), this.current || (this.current = {}, Y.perspective && T.perspective && (this.current.perspective = T.perspective, U(this.el, this.name, this.style(this.current)), this.redraw()))
-            }, a.set = function(a) {
-                c.call(this, a, function(a, b) {
+            }, a.set = function (a) {
+                c.call(this, a, function (a, b) {
                     this.current[a] = b
                 }), U(this.el, this.name, this.style(this.current)), this.redraw()
-            }, a.transition = function(a) {
+            }, a.transition = function (a) {
                 var b = this.values(a);
                 this.tween = new S({
                     current: this.current,
@@ -1100,7 +1111,7 @@ window.tram = function(a) {
                 var c, d = {};
                 for (c in this.current) d[c] = c in b ? b[c] : this.current[c];
                 this.active = !0, this.nextStyle = this.style(d)
-            }, a.fallback = function(a) {
+            }, a.fallback = function (a) {
                 var b = this.values(a);
                 this.tween = new S({
                     current: this.current,
@@ -1111,20 +1122,20 @@ window.tram = function(a) {
                     update: this.update,
                     context: this
                 })
-            }, a.update = function() {
+            }, a.update = function () {
                 U(this.el, this.name, this.style(this.current))
-            }, a.style = function(a) {
+            }, a.style = function (a) {
                 var b, c = "";
                 for (b in a) c += b + "(" + a[b] + ") ";
                 return c
-            }, a.values = function(a) {
+            }, a.values = function (a) {
                 var b, d = {};
-                return c.call(this, a, function(a, c, e) {
+                return c.call(this, a, function (a, c, e) {
                     d[a] = c, void 0 === this.current[a] && (b = 0, ~a.indexOf("scale") && (b = 1), this.current[a] = this.convert(b, e))
                 }), d
             }
         }),
-        Q = k(function(b) {
+        Q = k(function (b) {
             function c(a) {
                 1 === n.push(a) && I(g)
             }
@@ -1147,23 +1158,24 @@ window.tram = function(a) {
             function k(a, b, c) {
                 return e(a[0] + c * (b[0] - a[0]), a[1] + c * (b[1] - a[1]), a[2] + c * (b[2] - a[2]))
             }
+
             var m = {
                 ease: l.ease[1],
                 from: 0,
                 to: 1
             };
-            b.init = function(a) {
+            b.init = function (a) {
                 this.duration = a.duration || 0, this.delay = a.delay || 0;
                 var b = a.ease || m.ease;
                 l[b] && (b = l[b][1]), "function" != typeof b && (b = m.ease), this.ease = b, this.update = a.update || f, this.complete = a.complete || f, this.context = a.context || this, this.name = a.name;
                 var c = a.from,
                     d = a.to;
                 void 0 === c && (c = m.from), void 0 === d && (d = m.to), this.unit = a.unit || "", "number" == typeof c && "number" == typeof d ? (this.begin = c, this.change = d - c) : this.format(d, c), this.value = this.begin + this.unit, this.start = J(), a.autoplay !== !1 && this.play()
-            }, b.play = function() {
+            }, b.play = function () {
                 this.active || (this.start || (this.start = J()), this.active = !0, c(this))
-            }, b.stop = function() {
+            }, b.stop = function () {
                 this.active && (this.active = !1, i(this))
-            }, b.render = function(a) {
+            }, b.render = function (a) {
                 var b, c = a - this.start;
                 if (this.delay) {
                     if (c <= this.delay) return;
@@ -1174,7 +1186,7 @@ window.tram = function(a) {
                     return b = this.startRGB ? k(this.startRGB, this.endRGB, d) : j(this.begin + d * this.change), this.value = b + this.unit, void this.update.call(this.context, this.value)
                 }
                 b = this.endHex || this.begin + this.change, this.value = b + this.unit, this.update.call(this.context, this.value), this.complete.call(this.context), this.destroy()
-            }, b.format = function(a, b) {
+            }, b.format = function (a, b) {
                 if (b += "", a += "", "#" == a.charAt(0)) return this.startRGB = d(b), this.endRGB = d(a), this.endHex = a, this.begin = 0, void(this.change = 1);
                 if (!this.unit) {
                     var c = b.replace(q, ""),
@@ -1182,22 +1194,22 @@ window.tram = function(a) {
                     c !== e && h("tween", b, a), this.unit = c
                 }
                 b = parseFloat(b), a = parseFloat(a), this.begin = this.value = b, this.change = a - b
-            }, b.destroy = function() {
+            }, b.destroy = function () {
                 this.stop(), this.context = null, this.ease = this.update = this.complete = f
             };
             var n = [],
                 o = 1e3
         }),
-        R = k(Q, function(a) {
-            a.init = function(a) {
+        R = k(Q, function (a) {
+            a.init = function (a) {
                 this.duration = a.duration || 0, this.complete = a.complete || f, this.context = a.context, this.play()
-            }, a.render = function(a) {
+            }, a.render = function (a) {
                 var b = a - this.start;
                 b < this.duration || (this.complete.call(this.context), this.destroy())
             }
         }),
-        S = k(Q, function(a, b) {
-            a.init = function(a) {
+        S = k(Q, function (a, b) {
+            a.init = function (a) {
                 this.context = a.context, this.update = a.update, this.tweens = [], this.current = a.current;
                 var b, c;
                 for (b in a.values) c = a.values[b], this.current[b] !== c && this.tweens.push(new Q({
@@ -1210,12 +1222,12 @@ window.tram = function(a) {
                     autoplay: !1
                 }));
                 this.play()
-            }, a.render = function(a) {
+            }, a.render = function (a) {
                 var b, c, d = this.tweens.length,
                     e = !1;
                 for (b = d; b--;) c = this.tweens[b], c.context && (c.render(a), this.current[c.name] = c.value, e = !0);
                 return e ? void(this.update && this.update.call(this.context)) : this.destroy()
-            }, a.destroy = function() {
+            }, a.destroy = function () {
                 if (b.destroy.call(this), this.tweens) {
                     var a, c = this.tweens.length;
                     for (a = c; a--;) this.tweens[a].destroy();
@@ -1232,20 +1244,20 @@ window.tram = function(a) {
             fallback: !F.transition,
             agentTests: []
         };
-    b.fallback = function(a) {
+    b.fallback = function (a) {
         if (!F.transition) return T.fallback = !0;
         T.agentTests.push("(" + a + ")");
         var b = new RegExp(T.agentTests.join("|"), "i");
         T.fallback = b.test(navigator.userAgent)
-    }, b.fallback("6.0.[2-5] Safari"), b.tween = function(a) {
+    }, b.fallback("6.0.[2-5] Safari"), b.tween = function (a) {
         return new Q(a)
-    }, b.delay = function(a, b, c) {
+    }, b.delay = function (a, b, c) {
         return new R({
             complete: b,
             duration: a,
             context: c
         })
-    }, a.fn.tram = function(a) {
+    }, a.fn.tram = function (a) {
         return b.call(null, this, a)
     };
     var U = a.style,
@@ -1312,10 +1324,10 @@ window.tram = function(a) {
     }), F.transform && F.backface && (Y.z = [v, "translateZ"], Y.rotateZ = [w], Y.scaleZ = [s], Y.perspective = [u]);
     var Z = /ms/,
         $ = /s|\./,
-        _ = function() {
+        _ = function () {
             var a = "warn",
                 b = window.console;
-            return b && b[a] ? function(c) {
+            return b && b[a] ? function (c) {
                 b[a](c)
             } : f
         }();
@@ -1327,7 +1339,7 @@ window.tram = function(a) {
  * Copyright (c) 2014 Jason Moon (@JSONMOON)
  * Licensed MIT (/blob/master/LICENSE.txt)
  */
-(function(a) {
+(function (a) {
     if (typeof define === 'function' && define.amd) {
         define(['jquery'], a)
     } else if (typeof exports === 'object') {
@@ -1335,30 +1347,30 @@ window.tram = function(a) {
     } else {
         a(jQuery)
     }
-}(function($) {
+}(function ($) {
     if ($.support.cors || !$.ajaxTransport || !window.XDomainRequest) {
         return
     }
     var n = /^https?:\/\//i;
     var o = /^get|post$/i;
     var p = new RegExp('^' + location.protocol, 'i');
-    $.ajaxTransport('* text html xml json', function(j, k, l) {
+    $.ajaxTransport('* text html xml json', function (j, k, l) {
         if (!j.crossDomain || !j.async || !o.test(j.type) || !n.test(j.url) || !p.test(j.url)) {
             return
         }
         var m = null;
         return {
-            send: function(f, g) {
+            send: function (f, g) {
                 var h = '';
                 var i = (k.dataType || '').toLowerCase();
                 m = new XDomainRequest();
                 if (/^\d+$/.test(k.timeout)) {
                     m.timeout = k.timeout
                 }
-                m.ontimeout = function() {
+                m.ontimeout = function () {
                     g(500, 'timeout')
                 };
-                m.onload = function() {
+                m.onload = function () {
                     var a = 'Content-Length: ' + m.responseText.length + '\r\nContent-Type: ' + m.contentType;
                     var b = {
                         code: 200,
@@ -1398,8 +1410,9 @@ window.tram = function(a) {
                         g(b.code, b.message, c, a)
                     }
                 };
-                m.onprogress = function() {};
-                m.onerror = function() {
+                m.onprogress = function () {
+                };
+                m.onerror = function () {
                     g(500, 'error', {
                         text: m.responseText
                     })
@@ -1410,7 +1423,7 @@ window.tram = function(a) {
                 m.open(j.type, j.url);
                 m.send(h)
             },
-            abort: function() {
+            abort: function () {
                 if (m) {
                     m.abort()
                 }
@@ -1428,7 +1441,7 @@ vision.init();
  * ----------------------------------------------------------------------
  * vision: Interactions
  */
-vision.define('ix', function($, _) {
+vision.define('ix', function ($, _) {
     'use strict';
 
     var api = {};
@@ -1463,25 +1476,25 @@ vision.define('ix', function($, _) {
     // -----------------------------------
     // Module methods
 
-    api.init = function(list) {
-        setTimeout(function() {
+    api.init = function (list) {
+        setTimeout(function () {
             configure(list);
         }, 1);
     };
 
-    api.preview = function() {
+    api.preview = function () {
         designer = false;
-        setTimeout(function() {
+        setTimeout(function () {
             configure(window.__wf_ix);
         }, 1);
     };
 
-    api.design = function() {
+    api.design = function () {
         designer = true;
         api.destroy();
     };
 
-    api.destroy = function() {
+    api.destroy = function () {
         destroyed = true;
         $subs.each(teardown);
         vision.scroll.off(scroll);
@@ -1491,7 +1504,7 @@ vision.define('ix', function($, _) {
         readys = [];
     };
 
-    api.ready = function() {
+    api.ready = function () {
         // Ready should only be used after destroy, as a way to re-init
         if (config && destroyed) {
             destroyed = false;
@@ -1511,7 +1524,7 @@ vision.define('ix', function($, _) {
 
         // Map all interactions to a hash using slug as key.
         config = {};
-        _.each(list, function(item) {
+        _.each(list, function (item) {
             config[item.slug] = item.value;
         });
 
@@ -1552,7 +1565,7 @@ vision.define('ix', function($, _) {
         var setStyles = !(ios && _.any(triggers, isNonIOS));
         if (setStyles) api.style($el, ix.style);
 
-        _.each(triggers, function(trigger) {
+        _.each(triggers, function (trigger) {
             var state = {};
             var type = trigger.type;
             var stepsB = trigger.stepsB && trigger.stepsB.length;
@@ -1575,7 +1588,7 @@ vision.define('ix', function($, _) {
             }
 
             if (type == 'click') {
-                $el.on('click' + namespace, function(evt) {
+                $el.on('click' + namespace, function (evt) {
                     // Avoid late clicks on touch devices
                     if (!vision.validClick(evt.currentTarget)) return;
 
@@ -1620,7 +1633,7 @@ vision.define('ix', function($, _) {
                     offsetTop: convert(trigger.offsetTop),
                     offsetBot: convert(trigger.offsetBot)
                 });
-                return;
+
             }
         });
     }
@@ -1709,8 +1722,8 @@ vision.define('ix', function($, _) {
             if (selector) {
                 $el = (
                     trigger.descend ? $el.find(selector) :
-                    trigger.siblings ? $el.siblings(selector) :
-                    $(selector)
+                        trigger.siblings ? $el.siblings(selector) :
+                            $(selector)
                 );
                 if (inApp) $el.attr('data-ix-affect', 1);
             }
@@ -1779,7 +1792,7 @@ vision.define('ix', function($, _) {
 
             // If we have started, wrap set() in then() and reset queue
             if (meta.start) {
-                _tram.then(function() {
+                _tram.then(function () {
                     var queue = this.queue;
                     this.set(clean);
                     if (clean.display) {
@@ -1816,7 +1829,7 @@ vision.define('ix', function($, _) {
 
                 // If we've already started, we need to wrap it in a then()
                 if (meta.start) {
-                    _tram.then(function() {
+                    _tram.then(function () {
                         var queue = this.queue;
                         this.set({
                             display: display
@@ -1880,15 +1893,15 @@ vision.define('ix', function($, _) {
 
     // Events used by other vision modules
     var events = {
-        reset: function(i, el) {
+        reset: function (i, el) {
             el.__wf_intro = null;
         },
-        intro: function(i, el) {
+        intro: function (i, el) {
             if (el.__wf_intro) return;
             el.__wf_intro = true;
             $(el).triggerHandler(introEvent);
         },
-        outro: function(i, el) {
+        outro: function (i, el) {
             if (!el.__wf_intro) return;
             el.__wf_intro = null;
             $(el).triggerHandler(outroEvent);
@@ -1908,8 +1921,8 @@ vision.define('ix', function($, _) {
 
     // Replace events with async methods prior to init
     function asyncEvents() {
-        _.each(events, function(func, name) {
-            api.events[name] = function(i, el) {
+        _.each(events, function (func, name) {
+            api.events[name] = function (i, el) {
                 eventQueue.push([func, el]);
             };
         });
@@ -1924,7 +1937,7 @@ vision.define('ix', function($, _) {
  * ----------------------------------------------------------------------
  * vision: Touch events
  */
-vision.define('touch', function($, _) {
+vision.define('touch', function ($, _) {
     'use strict';
 
     var api = {};
@@ -1939,7 +1952,7 @@ vision.define('touch', function($, _) {
         };
     }
 
-    api.init = function(el) {
+    api.init = function (el) {
         if (fallback) return null;
         el = typeof el === 'string' ? $(el).get(0) : el;
         return el ? new Touch(el) : null;
@@ -2065,7 +2078,7 @@ vision.define('touch', function($, _) {
  * ----------------------------------------------------------------------
  * vision: Forms
  */
-vision.define('forms', function($, _) {
+vision.define('forms', function ($, _) {
     'use strict';
 
     var api = {};
@@ -2088,7 +2101,7 @@ vision.define('forms', function($, _) {
     // MailChimp domains: list-manage.com + mirrors
     var chimpRegex = /list-manage[1-9]?.com/i;
 
-    api.ready = function() {
+    api.ready = function () {
         // Init forms
         init();
 
@@ -2096,7 +2109,7 @@ vision.define('forms', function($, _) {
         if (!listening) addListeners();
     };
 
-    api.preview = api.design = function() {
+    api.preview = api.design = function () {
         init();
     };
 
@@ -2148,7 +2161,7 @@ vision.define('forms', function($, _) {
         listening = true;
 
         // Handle form submission for vision forms
-        $doc.on('submit', namespace + ' form', function(evt) {
+        $doc.on('submit', namespace + ' form', function (evt) {
             var data = $.data(this, namespace);
             if (data.handler) {
                 data.evt = evt;
@@ -2184,7 +2197,7 @@ vision.define('forms', function($, _) {
         result = result || {};
 
         // The ":input" selector is a jQuery shortcut to select all inputs, selects, textareas
-        form.find(':input:not([type="submit"])').each(function(i, el) {
+        form.find(':input:not([type="submit"])').each(function (i, el) {
             var field = $(el);
             var type = field.attr('type');
             var name = field.attr('data-name') || field.attr('name') || ('Field ' + (i + 1));
@@ -2260,10 +2273,10 @@ vision.define('forms', function($, _) {
             data: payload,
             dataType: 'json',
             crossDomain: true
-        }).done(function() {
+        }).done(function () {
             data.success = true;
             afterSubmit(data);
-        }).fail(function() {
+        }).fail(function () {
             afterSubmit(data);
         });
     }
@@ -2292,7 +2305,7 @@ vision.define('forms', function($, _) {
 
         // Use special format for MailChimp params
         var fullName;
-        _.each(payload, function(value, key) {
+        _.each(payload, function (value, key) {
             if (emailField.test(key)) payload.EMAIL = value;
             if (/^((full[ _-]?)?name)$/i.test(key)) fullName = value;
             if (/^(first[ _-]?name)$/i.test(key)) payload.FNAME = value;
@@ -2318,11 +2331,11 @@ vision.define('forms', function($, _) {
             url: url,
             data: payload,
             dataType: 'jsonp'
-        }).done(function(resp) {
+        }).done(function (resp) {
             data.success = (resp.result == 'success' || /already/.test(resp.msg));
             if (!data.success) console.info('MailChimp error: ' + resp.msg);
             afterSubmit(data);
-        }).fail(function() {
+        }).fail(function () {
             afterSubmit(data);
         });
     }
@@ -2356,7 +2369,7 @@ vision.define('forms', function($, _) {
         data.evt = null;
     }
 
-    var disconnected = _.debounce(function() {
+    var disconnected = _.debounce(function () {
         alert('Oops! This page has a form that is powered by vision, but important code was removed that is required to make the form work. Please contact support@vision.com to fix this issue.');
     }, 100);
 
@@ -2367,7 +2380,7 @@ vision.define('forms', function($, _) {
  * ----------------------------------------------------------------------
  * vision: Maps widget
  */
-vision.define('maps', function($, _) {
+vision.define('maps', function ($, _) {
     'use strict';
 
     var api = {};
@@ -2379,12 +2392,12 @@ vision.define('maps', function($, _) {
     // -----------------------------------
     // Module methods
 
-    api.ready = function() {
+    api.ready = function () {
         // Init Maps on the front-end
         if (!vision.env()) initMaps();
     };
 
-    api.preview = function() {
+    api.preview = function () {
         // Update active map nodes
         $maps = $doc.find(namespace);
         // Listen for resize events
@@ -2395,7 +2408,7 @@ vision.define('maps', function($, _) {
         }
     };
 
-    api.design = function(evt) {
+    api.design = function (evt) {
         // Update active map nodes
         $maps = $doc.find(namespace);
         // Stop listening for resize events
@@ -2428,7 +2441,8 @@ vision.define('maps', function($, _) {
         }
 
         function mapsLoaded() {
-            window._wf_maps_loaded = function() {};
+            window._wf_maps_loaded = function () {
+            };
             google = window.google;
             $maps.each(renderMap);
             removeListeners();
@@ -2519,7 +2533,7 @@ vision.define('maps', function($, _) {
         state.marker.setMap(state.map);
 
         // Set map position and offset
-        state.setMapPosition = function() {
+        state.setMapPosition = function () {
             state.map.setCenter(state.latLngObj);
             var offsetX = 0;
             var offsetY = 0;
@@ -2535,7 +2549,7 @@ vision.define('maps', function($, _) {
         };
 
         // Fix position after first tiles have loaded
-        google.maps.event.addListener(state.map, 'tilesloaded', function() {
+        google.maps.event.addListener(state.map, 'tilesloaded', function () {
             google.maps.event.clearListeners(state.map, 'tilesloaded');
             state.setMapPosition();
         });
@@ -2570,7 +2584,7 @@ vision.define('maps', function($, _) {
         }
 
         // Click marker to open in google maps
-        google.maps.event.addListener(state.marker, 'click', function() {
+        google.maps.event.addListener(state.marker, 'click', function () {
             window.open('https://maps.google.com/?z=' + state.zoom + '&daddr=' + state.latLng);
         });
 
@@ -2584,14 +2598,14 @@ vision.define('maps', function($, _) {
  * ----------------------------------------------------------------------
  * vision: Google+ widget
  */
-vision.define('gplus', function($) {
+vision.define('gplus', function ($) {
     'use strict';
 
     var $doc = $(document);
     var api = {};
     var loaded;
 
-    api.ready = function() {
+    api.ready = function () {
         // Load Google+ API on the front-end
         if (!vision.env() && !loaded) init();
     };
@@ -2612,7 +2626,7 @@ vision.define('gplus', function($) {
  * ----------------------------------------------------------------------
  * vision: Smooth scroll
  */
-vision.define('scroll', function($) {
+vision.define('scroll', function ($) {
     'use strict';
 
     var $doc = $(document);
@@ -2628,7 +2642,7 @@ vision.define('scroll', function($) {
         }
 
         // When clicking on a link, check if it links to another part of the page
-        $doc.on('click', 'a', function(e) {
+        $doc.on('click', 'a', function (e) {
             if (vision.env('design')) {
                 return;
             }
@@ -2676,7 +2690,7 @@ vision.define('scroll', function($) {
         var header = $('header, body > .header, body > .w-nav');
         var offset = header.css('position') === 'fixed' ? header.outerHeight() : 0;
 
-        win.setTimeout(function() {
+        win.setTimeout(function () {
             scroll(el, offset);
         }, e ? 0 : 300);
     }
@@ -2697,7 +2711,7 @@ vision.define('scroll', function($) {
         var mult = 1;
 
         // Check for custom time multiplier on the body and the element
-        $('body').add(el).each(function(i) {
+        $('body').add(el).each(function (i) {
             var time = parseFloat($(this).attr('data-scroll-time'), 10);
             if (!isNaN(time) && (time === 0 || time > 0)) {
                 mult = time;
@@ -2706,18 +2720,18 @@ vision.define('scroll', function($) {
 
         // Shim for IE8 and below
         if (!Date.now) {
-            Date.now = function() {
+            Date.now = function () {
                 return new Date().getTime();
             };
         }
 
         var clock = Date.now();
-        var animate = win.requestAnimationFrame || win.mozRequestAnimationFrame || win.webkitRequestAnimationFrame || function(fn) {
+        var animate = win.requestAnimationFrame || win.mozRequestAnimationFrame || win.webkitRequestAnimationFrame || function (fn) {
                 win.setTimeout(fn, 15);
             };
         var duration = (472.143 * Math.log(Math.abs(start - end) + 125) - 2000) * mult;
 
-        var step = function() {
+        var step = function () {
             var elapsed = Date.now() - clock;
             win.scroll(0, getY(start, end, elapsed, duration));
 
@@ -2750,7 +2764,7 @@ vision.define('scroll', function($) {
  * ----------------------------------------------------------------------
  * vision: Auto-select links to current page or section
  */
-vision.define('links', function($, _) {
+vision.define('links', function ($, _) {
     'use strict';
 
     var api = {};
@@ -2828,15 +2842,15 @@ vision.define('links', function($, _) {
         var viewHeight = $win.height();
 
         // Check each anchor for a section in view
-        _.each(anchors, function(anchor) {
+        _.each(anchors, function (anchor) {
             var $link = anchor.link;
             var $section = anchor.sec;
             var top = $section.offset().top;
             var height = $section.outerHeight();
             var offset = viewHeight * 0.5;
             var active = ($section.is(':visible') &&
-                top + height - offset >= viewTop &&
-                top + offset <= viewTop + viewHeight);
+            top + height - offset >= viewTop &&
+            top + offset <= viewTop + viewHeight);
             if (anchor.active === active) return;
             anchor.active = active;
             setClass($link, linkCurrent, active);
@@ -2858,7 +2872,7 @@ vision.define('links', function($, _) {
  * ----------------------------------------------------------------------
  * vision: Slider component
  */
-vision.define('slider', function($, _) {
+vision.define('slider', function ($, _) {
     'use strict';
 
     var api = {};
@@ -2876,21 +2890,21 @@ vision.define('slider', function($, _) {
     // -----------------------------------
     // Module methods
 
-    api.ready = function() {
+    api.ready = function () {
         init();
     };
 
-    api.design = function() {
+    api.design = function () {
         designer = true;
         init();
     };
 
-    api.preview = function() {
+    api.preview = function () {
         designer = false;
         init();
     };
 
-    api.redraw = function() {
+    api.redraw = function () {
         redraw = true;
         init();
     };
@@ -2987,7 +3001,7 @@ vision.define('slider', function($, _) {
 
         // Remove gaps from formatted html (for inline-blocks)
         if (!inApp) {
-            data.mask.contents().filter(function() {
+            data.mask.contents().filter(function () {
                 return this.nodeType === 3;
             }).remove();
         }
@@ -3027,7 +3041,7 @@ vision.define('slider', function($, _) {
             config.timerMax = +data.el.attr('data-autoplay-limit');
             // Disable timer on first touch or mouse down
             var touchEvents = 'mousedown' + namespace + ' touchstart' + namespace;
-            if (!designer) data.el.off(touchEvents).one(touchEvents, function() {
+            if (!designer) data.el.off(touchEvents).one(touchEvents, function () {
                 stopTimer(data);
             });
         }
@@ -3041,7 +3055,7 @@ vision.define('slider', function($, _) {
     }
 
     function previous(data) {
-        return function(evt) {
+        return function (evt) {
             change(data, {
                 index: data.index - 1,
                 vector: -1
@@ -3050,7 +3064,7 @@ vision.define('slider', function($, _) {
     }
 
     function next(data) {
-        return function(evt) {
+        return function (evt) {
             change(data, {
                 index: data.index + 1,
                 vector: 1
@@ -3065,8 +3079,8 @@ vision.define('slider', function($, _) {
             init();
             layout(data); // Rebuild and find new slides
         }
-        _.each(data.anchors, function(anchor, index) {
-            $(anchor.els).each(function(i, el) {
+        _.each(data.anchors, function (anchor, index) {
+            $(anchor.els).each(function (i, el) {
                 if ($(el).index() === value) found = index;
             });
         });
@@ -3081,7 +3095,7 @@ vision.define('slider', function($, _) {
         var config = data.config;
         var timerMax = config.timerMax;
         if (timerMax && data.timerCount++ > timerMax) return;
-        data.timerId = window.setTimeout(function() {
+        data.timerId = window.setTimeout(function () {
             if (data.timerId == null || designer) return;
             next(data)();
             startTimer(data);
@@ -3094,7 +3108,7 @@ vision.define('slider', function($, _) {
     }
 
     function handler(data) {
-        return function(evt, options) {
+        return function (evt, options) {
             options = options || {};
 
             // Designer settings
@@ -3345,7 +3359,7 @@ vision.define('slider', function($, _) {
             x: 0,
             width: 0
         }];
-        data.slides.each(function(i, el) {
+        data.slides.each(function (i, el) {
             if (anchor - offset > threshold) {
                 pages++;
                 offset += maskWidth;
@@ -3408,7 +3422,7 @@ vision.define('slider', function($, _) {
 
     function slidesChanged(data) {
         var slidesWidth = 0;
-        data.slides.each(function(i, el) {
+        data.slides.each(function (i, el) {
             slidesWidth += $(el).outerWidth(true);
         });
         if (data.slidesWidth !== slidesWidth) {
@@ -3425,7 +3439,7 @@ vision.define('slider', function($, _) {
  * ----------------------------------------------------------------------
  * vision: Lightbox component
  */
-var lightbox = (function(window, document, $, tram, undefined) {
+var lightbox = (function (window, document, $, tram, undefined) {
     'use strict';
 
     var isArray = Array.isArray;
@@ -3455,13 +3469,13 @@ var lightbox = (function(window, document, $, tram, undefined) {
         if (items.length > 1) {
             $refs.items = $refs.empty;
 
-            items.forEach(function(item) {
+            items.forEach(function (item) {
                 var $thumbnail = dom('thumbnail');
                 var $item = dom('item').append($thumbnail);
 
                 $refs.items = $refs.items.add($item);
 
-                loadImage(item.thumbnailUrl || item.url, function($image) {
+                loadImage(item.thumbnailUrl || item.url, function ($image) {
                     if ($image.prop('width') > $image.prop('height')) {
                         addClass($image, 'wide');
                     } else {
@@ -3493,7 +3507,7 @@ var lightbox = (function(window, document, $, tram, undefined) {
     /**
      * Creates the DOM structure required by the lightbox.
      */
-    lightbox.build = function() {
+    lightbox.build = function () {
         // In case `build` is called more than once.
         lightbox.destroy();
 
@@ -3532,12 +3546,12 @@ var lightbox = (function(window, document, $, tram, undefined) {
             .on('tap', selector('image, caption'), handlerNext);
         $refs.container
             .on('tap', selector('view, strip'), handlerHide)
-        // Prevent images from being dragged around.
-        .on('dragstart', selector('img'), preventDefault);
+            // Prevent images from being dragged around.
+            .on('dragstart', selector('img'), preventDefault);
         $refs.lightbox
             .on('keydown', keyHandler)
-        // IE loses focus to inner nodes without letting us know.
-        .on('focusin', focusThis);
+            // IE loses focus to inner nodes without letting us know.
+            .on('focusin', focusThis);
 
         // The `tabindex` attribute is needed to enable non-input elements
         // to receive keyboard events.
@@ -3549,7 +3563,7 @@ var lightbox = (function(window, document, $, tram, undefined) {
     /**
      * Dispose of DOM nodes created by the lightbox.
      */
-    lightbox.destroy = function() {
+    lightbox.destroy = function () {
         if (!$refs) {
             return;
         }
@@ -3562,7 +3576,7 @@ var lightbox = (function(window, document, $, tram, undefined) {
     /**
      * Show a specific item.
      */
-    lightbox.show = function(index) {
+    lightbox.show = function (index) {
         // Bail if we are already showing this item.
         if (index === currentIndex) {
             return;
@@ -3576,7 +3590,7 @@ var lightbox = (function(window, document, $, tram, undefined) {
         // For videos, load an empty SVG with the video dimensions to preserve
         // the video’s aspect ratio while being responsive.
         var url = item.html && svgDataUri(item.width, item.height) || item.url;
-        loadImage(url, function($image) {
+        loadImage(url, function ($image) {
             // Make sure this is the last item requested to be shown since
             // images can finish loading in a different order than they were
             // requested in.
@@ -3659,7 +3673,7 @@ var lightbox = (function(window, document, $, tram, undefined) {
     /**
      * Hides the lightbox.
      */
-    lightbox.hide = function() {
+    lightbox.hide = function () {
         tram($refs.lightbox)
             .add('opacity .3s')
             .start({
@@ -3670,20 +3684,20 @@ var lightbox = (function(window, document, $, tram, undefined) {
         return lightbox;
     };
 
-    lightbox.prev = function() {
+    lightbox.prev = function () {
         if (currentIndex > 0) {
             lightbox.show(currentIndex - 1);
         }
     };
 
-    lightbox.next = function() {
+    lightbox.next = function () {
         if (currentIndex < items.length - 1) {
             lightbox.show(currentIndex + 1);
         }
     };
 
     function createHandler(action) {
-        return function(event) {
+        return function (event) {
             // We only care about events triggered directly on the bound selectors.
             if (this != event.target) {
                 return;
@@ -3700,14 +3714,14 @@ var lightbox = (function(window, document, $, tram, undefined) {
     var handlerNext = createHandler(lightbox.next);
     var handlerHide = createHandler(lightbox.hide);
 
-    var itemTapHandler = function(event) {
+    var itemTapHandler = function (event) {
         var index = $(this).index();
 
         event.preventDefault();
         lightbox.show(index);
     };
 
-    var swipeHandler = function(event, data) {
+    var swipeHandler = function (event, data) {
         // Prevent scrolling.
         event.preventDefault();
 
@@ -3718,7 +3732,7 @@ var lightbox = (function(window, document, $, tram, undefined) {
         }
     };
 
-    var focusThis = function() {
+    var focusThis = function () {
         this.focus();
     };
 
@@ -3762,7 +3776,7 @@ var lightbox = (function(window, document, $, tram, undefined) {
     function loadImage(url, callback) {
         var $image = dom('img', 'img');
 
-        $image.one('load', function() {
+        $image.one('load', function () {
             callback($image);
         });
 
@@ -3773,7 +3787,7 @@ var lightbox = (function(window, document, $, tram, undefined) {
     }
 
     function remover($element) {
-        return function() {
+        return function () {
             $element.remove();
         };
     }
@@ -3788,7 +3802,7 @@ var lightbox = (function(window, document, $, tram, undefined) {
         this.hide();
     }
 
-    Spinner.prototype.show = function() {
+    Spinner.prototype.show = function () {
         var spinner = this;
 
         // Bail if we are already showing the spinner.
@@ -3796,13 +3810,13 @@ var lightbox = (function(window, document, $, tram, undefined) {
             return;
         }
 
-        spinner.timeoutId = setTimeout(function() {
+        spinner.timeoutId = setTimeout(function () {
             spinner.$element.removeClass(spinner.className);
             delete spinner.timeoutId;
         }, spinner.delay);
     };
 
-    Spinner.prototype.hide = function() {
+    Spinner.prototype.hide = function () {
         var spinner = this;
         if (spinner.timeoutId) {
             clearTimeout(spinner.timeoutId);
@@ -3874,7 +3888,7 @@ var lightbox = (function(window, document, $, tram, undefined) {
 
     // Compute some dimensions manually for iOS, because of buggy support for VH.
     // Also, Android built-in browser does not support viewport units.
-    (function() {
+    (function () {
         var ua = window.navigator.userAgent;
         var iOS = /(iPhone|iPod|iPad).+AppleWebKit/i.test(ua);
         var android = ua.indexOf('Android ') > -1 && ua.indexOf('Chrome') == -1;
@@ -3946,7 +3960,7 @@ var lightbox = (function(window, document, $, tram, undefined) {
     return lightbox;
 })(window, document, jQuery, window.tram);
 
-vision.define('lightbox', function($, _) {
+vision.define('lightbox', function ($, _) {
     'use strict';
 
     var api = {};
@@ -4005,10 +4019,10 @@ vision.define('lightbox', function($, _) {
         } else {
             data.el
                 .on('tap' + namespace, tapHandler(data))
-            // Prevent page scrolling to top when clicking on lightbox triggers.
-            .on('click' + namespace, function(e) {
-                e.preventDefault();
-            });
+                // Prevent page scrolling to top when clicking on lightbox triggers.
+                .on('click' + namespace, function (e) {
+                    e.preventDefault();
+                });
         }
     }
 
@@ -4049,14 +4063,14 @@ vision.define('lightbox', function($, _) {
     }
 
     function tapHandler(data) {
-        return function() {
+        return function () {
             data.items.length && lightbox(data.items, data.index || 0);
         };
     }
 
     function supportOldLightboxJson(data) {
         if (data.images) {
-            data.images.forEach(function(item) {
+            data.images.forEach(function (item) {
                 item.type = 'image';
             });
             data.items = data.images;
@@ -4079,7 +4093,7 @@ vision.define('lightbox', function($, _) {
  * ----------------------------------------------------------------------
  * vision: Navbar component
  */
-vision.define('navbar', function($, _) {
+vision.define('navbar', function ($, _) {
     'use strict';
 
     var api = {};
@@ -4214,14 +4228,14 @@ vision.define('navbar', function($, _) {
     }
 
     function handler(data) {
-        return function(evt, options) {
+        return function (evt, options) {
             options = options || {};
             var winWidth = $win.width();
             configure(data);
             options.open === true && open(data, true);
             options.open === false && close(data, true);
             // Reopen if media query changed after setting
-            data.open && _.defer(function() {
+            data.open && _.defer(function () {
                 if (winWidth != $win.width()) reopen(data);
             });
         };
@@ -4235,13 +4249,13 @@ vision.define('navbar', function($, _) {
 
     function toggle(data) {
         // Debounce toggle to wait for accurate open state
-        return _.debounce(function(evt) {
+        return _.debounce(function (evt) {
             data.open ? close(data) : open(data);
         });
     }
 
     function navigate(data) {
-        return function(evt) {
+        return function (evt) {
             var link = $(this);
             var href = link.attr('href');
 
@@ -4263,7 +4277,7 @@ vision.define('navbar', function($, _) {
         if (data.outside) $doc.off('tap' + namespace, data.outside);
 
         // Close menu when tapped outside, debounced to wait for state
-        return _.debounce(function(evt) {
+        return _.debounce(function (evt) {
             if (!data.open) return;
             var menu = $(evt.target).closest('.w-nav-menu');
             if (!data.menu.is(menu)) {
@@ -4296,7 +4310,7 @@ vision.define('navbar', function($, _) {
         // Set max-width of each element to match container
         var containMax = data.container.css(maxWidth);
         if (containMax == 'none') containMax = '';
-        return function(i, link) {
+        return function (i, link) {
             link = $(link);
             link.css(maxWidth, '');
             // Don't set the max-width if an upstream value exists
@@ -4439,7 +4453,7 @@ vision.define('navbar', function($, _) {
  * ----------------------------------------------------------------------
  * vision: Dropdown component
  */
-vision.define('dropdown', function($, _) {
+vision.define('dropdown', function ($, _) {
     'use strict';
 
     var api = {};
@@ -4517,7 +4531,7 @@ vision.define('dropdown', function($, _) {
     }
 
     function handler(data) {
-        return function(evt, options) {
+        return function (evt, options) {
             options = options || {};
 
             if (evt.type == 'w-close') {
@@ -4528,13 +4542,13 @@ vision.define('dropdown', function($, _) {
                 configure(data);
                 options.open === true && open(data, true);
                 options.open === false && close(data, true);
-                return;
+
             }
         };
     }
 
     function toggle(data) {
-        return _.debounce(function(evt) {
+        return _.debounce(function (evt) {
             data.open ? close(data) : open(data);
         });
     }
@@ -4576,7 +4590,7 @@ vision.define('dropdown', function($, _) {
 
     function closeOthers(data) {
         var self = data.el[0];
-        $dropdowns.each(function(i, other) {
+        $dropdowns.each(function (i, other) {
             var $other = $(other);
             if ($other.is(self) || $other.has(self).length) return;
             $other.triggerHandler(closeEvent);
@@ -4588,7 +4602,7 @@ vision.define('dropdown', function($, _) {
         if (data.outside) $doc.off('tap' + namespace, data.outside);
 
         // Close menu when tapped outside
-        return _.debounce(function(evt) {
+        return _.debounce(function (evt) {
             if (!data.open) return;
             var $target = $(evt.target);
             if ($target.closest('.w-dropdown-toggle').length) return;
@@ -4599,7 +4613,7 @@ vision.define('dropdown', function($, _) {
     }
 
     function complete(data) {
-        return function() {
+        return function () {
             data.list.removeClass(stateOpen);
             data.toggle.removeClass(stateOpen);
         };
@@ -4612,7 +4626,7 @@ vision.define('dropdown', function($, _) {
  * ----------------------------------------------------------------------
  * vision: Tabs component
  */
-vision.define('tabs', function($, _) {
+vision.define('tabs', function ($, _) {
     'use strict';
 
     var api = {};
@@ -4703,7 +4717,7 @@ vision.define('tabs', function($, _) {
     }
 
     function linkSelect(data) {
-        return function(evt) {
+        return function (evt) {
             var tab = evt.currentTarget.getAttribute(tabAttr);
             tab && changeTab(data, {
                 tab: tab
@@ -4723,7 +4737,7 @@ vision.define('tabs', function($, _) {
         data.current = tab;
 
         // Select the current link
-        data.links.each(function(i, el) {
+        data.links.each(function (i, el) {
             var $el = $(el);
             if (el.getAttribute(tabAttr) === tab) $el.addClass(linkCurrent).each(ix.intro);
             else if ($el.hasClass(linkCurrent)) $el.removeClass(linkCurrent).each(ix.outro);
@@ -4732,7 +4746,7 @@ vision.define('tabs', function($, _) {
         // Find the new tab panes and keep track of previous
         var targets = [];
         var previous = [];
-        data.panes.each(function(i, el) {
+        data.panes.each(function (i, el) {
             var $el = $(el);
             if (el.getAttribute(tabAttr) === tab) {
                 targets.push(el);
@@ -4804,7 +4818,7 @@ vision.define('tabs', function($, _) {
  * ----------------------------------------------------------------------
  * vision: Brand pages on the subdomain
  */
-vision.define('branding', function($, _) {
+vision.define('branding', function ($, _) {
     'use strict';
 
     var api = {};
@@ -4816,7 +4830,7 @@ vision.define('branding', function($, _) {
     // -----------------------------------
     // Module methods
 
-    api.ready = function() {
+    api.ready = function () {
         var doBranding = $html.attr("data-wf-status") && location.href.match(/vision.com|visiontest.com/);
 
         if (doBranding) {
@@ -4861,7 +4875,7 @@ vision.define('branding', function($, _) {
 
             $body.append($link);
 
-            setTimeout(function() {
+            setTimeout(function () {
                 $branding.css({
                     opacity: '1.0'
                 });
@@ -5671,10 +5685,9 @@ vision.require('ix').init([{
 }]);
 
 
+$(document).ready(function () {
 
-$(document).ready(function() {
-
-    $(".accordion-group .accordion-toggle").on('click', function() {
+    $(".accordion-group .accordion-toggle").on('click', function () {
         var $self = $(this).parent().parent();
 
         if ($self.find('.accordion-heading').hasClass('in_head')) {
@@ -5688,7 +5701,7 @@ $(document).ready(function() {
         }
     });
 
-    $('.w-dropdown-list').on('mouseleave', function() {
+    $('.w-dropdown-list').on('mouseleave', function () {
 
         $(this).removeClass('w--open');
     });
@@ -5696,7 +5709,7 @@ $(document).ready(function() {
 
     $('.portfolio-tittle._2 .w-inline-block').removeClass('overlay');
 
-    $('.portfolio-tittle._2').on('mouseover', function() {
+    $('.portfolio-tittle._2').on('mouseover', function () {
 
         $(this).parent().find('.overlay').addClass('overlay_hover');
 
@@ -5704,29 +5717,27 @@ $(document).ready(function() {
 
     $('.portfolio-tittle._2').css('opacity', '0');
 
-    $('.portfolio-image .wrapper').on('mouseover mouseenter hover', function() {
+    $('.portfolio-image .wrapper').on('mouseover mouseenter hover', function () {
 
         $(this).find('.portfolio-tittle').css('opacity', '1');
     });
-    $('.portfolio-image .wrapper').on('mouseleave', function() {
+    $('.portfolio-image .wrapper').on('mouseleave', function () {
         $(this).find('.portfolio-tittle').css('opacity', '0');
     });
-  
 
 
 });
 
 
-$.fn.chart_skill = function(options) {
+$.fn.chart_skill = function (options) {
 
-    return this.each(function() {
+    return this.each(function () {
         var container = $(this),
             elements = container.find('.chart');
 
 
-
-        container.on('start_animation', function() {
-            elements.each(function(i) {
+        container.on('start_animation', function () {
+            elements.each(function (i) {
                 var $chart = $(this);
 
                 var color = $(this).data('color');
@@ -5747,36 +5758,78 @@ $.fn.chart_skill = function(options) {
             });
         });
     });
-}
+};
 
 
-$(document).ready(function() {
+$(document).ready(function () {
     var $window = $(window);
 
-        // Function to handle changes to style classes based on window width
-        function checkWidth() {
+    // Function to handle changes to style classes based on window width
+    function checkWidth() {
         if ($window.width() < 980) {
             $('.left_navigation .navbar').removeClass('pos-left');
-             $('.left_navigation .navbar').find('.left_nav_widget').css('display', 'none');
-             $('.left_navigation #content').css('width', '100%');
-             $('.left_navigation #content').css('margin-left', '0%');
-             $('.left_navigation .tp-banner-container').css('margin-top', '75px');
-            };
-
+            $('.left_navigation .navbar').find('.left_nav_widget').css('display', 'none');
+            $('.left_navigation #content').css('width', '100%');
+            $('.left_navigation #content').css('margin-left', '0%');
+            $('.left_navigation .tp-banner-container').css('margin-top', '75px');
+        }
         if ($window.width() >= 980) {
             $('.left_navigation .navbar').addClass('pos-left');
             $('.left_navigation .navbar').find('.left_nav_widget').css('display', 'block');
             $('.left_navigation #content').css('width', '83%');
             $('.left_navigation #content').css('margin-left', '17%');
-              $('.left_navigation .tp-banner-container').css('margin-top', '0px');
+            $('.left_navigation .tp-banner-container').css('margin-top', '0px');
         }
-    } 
+    }
 
     // Execute on load
     checkWidth();
 
     // Bind event listener
-        $(window).resize(checkWidth);
+    $(window).resize(checkWidth);
+
+    $('#start-now').on('click', function (e) {
+        console.log('start-now');
+        $('html, body').animate({
+            scrollTop: ($('#why-us').offset().top)
+        }, 2000);
+        e.preventDefault();
+    });
+
+    $('#contact-now').on('click', function (e) {
+        console.log('contact-now');
+        $('html, body').animate({
+            scrollTop: ($('#contact').offset().top) - 40
+        }, 2000);
+        e.preventDefault();
+    });
+
+    $('#nav_contact').click(function (e) {
+        $('html, body').animate({
+            scrollTop: ($('#contact').offset().top) - 40
+        }, 2000);
+        e.preventDefault();
+    });
+
+    $('#footer_contact').click(function (e) {
+        $('html, body').animate({
+            scrollTop: ($('#contact').offset().top) - 40
+        }, 2000);
+        e.preventDefault();
+    });
+
+    //Check to see if the window is top if not then display button
+    $(window).scroll(function () {
+        if ($(this).scrollTop() > 100) {
+            $('.scrollToTop').fadeIn();
+        } else {
+            $('.scrollToTop').fadeOut();
+        }
+    });
+
+    //Click event to scroll to top
+    $('.scrollToTop').click(function () {
+        $('html, body').animate({scrollTop: 0}, 800);
+        return false;
+    });
 });
-
-

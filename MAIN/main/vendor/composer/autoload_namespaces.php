@@ -31,6 +31,7 @@ return array(
     'Net' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
     'Math' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),
     'Jeremeamia\\SuperClosure' => array($vendorDir . '/jeremeamia/SuperClosure/src'),
+    'Ipunkt\\LaravelAnalytics\\' => array($vendorDir . '/ipunkt/laravel-analytics/src'),
     'Illuminate' => array($vendorDir . '/laravel/framework/src'),
     'Fitztrev\\LaravelHtmlMinify' => array($vendorDir . '/fitztrev/laravel-html-minify/src'),
     'File' => array($vendorDir . '/phpseclib/phpseclib/phpseclib'),

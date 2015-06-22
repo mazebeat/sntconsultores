@@ -8,8 +8,5 @@
 
 {{ HTML::script('js/vision.js') }}
 
-<!--[if lte IE 9]>
-{{ HTML::script('https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js') }}
-<![endif]-->
 @yield('script-text')
 {{-- end javascript files --}}

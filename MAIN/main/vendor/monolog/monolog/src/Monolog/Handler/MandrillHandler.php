@@ -25,7 +25,7 @@ class MandrillHandler extends MailHandler
 
     /**
      * @param string                  $apiKey  A valid Mandrill API key
-     * @param callable|\Swift_Message $message An example message for real messages, only the assets will be replaced
+     * @param callable|\Swift_Message $message An example message for real messages, only the body will be replaced
      * @param integer                 $level   The minimum logging level at which this handler will be triggered
      * @param Boolean                 $bubble  Whether the messages that are handled can bubble up the stack or not
      */
@@ -63,7 +63,9 @@ class MandrillHandler extends MailHandler
             'async' => false,
         )));
 
-        curl_exec($ch);
+        if (curl_exec($ch) === false) {
+            throw new \RuntimeException(sprintf('Curl error (code %s): %s', curl_errno($ch), curl_error($ch)));
+        }
         curl_close($ch);
     }
 }

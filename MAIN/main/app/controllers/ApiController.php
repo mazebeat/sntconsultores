@@ -28,7 +28,7 @@ class ApiController extends BaseController
 		$this->status  = $status;
 		$this->headers = $headers;
 
-		$this->log = new MessageLog('sntconsultores');
+		$this->log = new MessageLog('sntconsultores_app');
 	}
 
 	/**
@@ -152,6 +152,33 @@ class ApiController extends BaseController
 		$mt = explode(' ', microtime());
 
 		return $mt[1] * 1000 + round($mt[0] * 1000);
+	}
+
+	/**
+	 * @param $path
+	 */
+	public static function returnImage($path)
+	{
+		header('Content-Type: image/' . substr($path, -3));
+		header('Content-Length: ' . filesize($path));
+		readfile($path);
+		exit;
+	}
+
+	/**
+	 * @param $path
+	 *
+	 * @return \Illuminate\Http\Response
+	 */
+	public static function returnImage2($path)
+	{
+		if (File::exists($path)) {
+			$filetype = File::type($path);
+			$response = Response::make(File::get($path), 200);
+			$response->header('Content-Type', $filetype);
+
+			return $response;
+		}
 	}
 
 	/**

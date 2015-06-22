@@ -1,5 +1,7 @@
 <?php
 
+use App\Util\MessageLog;
+
 /**
  * Created by PhpStorm.
  * User: Maze
@@ -10,7 +12,7 @@ class MailController extends ApiController
 {
 	public function sendmail()
 	{
-//		try {
+		try {
 			$rules     = array('name' => 'required', 'email' => 'required|email', 'subject' => 'required', 'message' => 'required');
 			$data      = Input::only('name', 'email', 'subject', 'message');
 			$validator = Validator::make($data, $rules);
@@ -26,7 +28,7 @@ class MailController extends ApiController
 			$subject   = Str::lower(Input::get('subject'));
 			$message   = Str::lower(Input::get('message'));
 			$datesend  = Carbon::now();
-			$messageId = Crypt::encrypt(Str::lower($name) . $email . $datesend);
+			$messageId = Crypt::encrypt(Str::lower($name) . '|' . $email . '|' . $datesend);
 			$data      = array('name'    => $name,
 			                   'email'   => $email,
 			                   'subject' => $subject,
@@ -39,33 +41,50 @@ class MailController extends ApiController
 			});
 
 			// Mail for us
-//			Mail::send('emails.us', $data, function ($message) {
-//				$message->from(Config::get('api.company.contactemail'), Config::get('api.company.name'));
-//				$message->to(Config::get('api.company.contactemail'), Config::get('api.company.name'))->subject('Contacto Cliente');
-//			});
+			Mail::send('emails.us', $data, function ($message) {
+				$message->from(Config::get('api.company.contactemail'), Config::get('api.company.name'));
+				$message->to(Config::get('api.company.contactemail'), Config::get('api.company.name'))->subject('Contacto Cliente');
+			});
 
 			// Redirect to Home age (Change for ajax submit)
 			return Redirect::to('/');
-//		} catch (Exception $e) {
-//			$this->getLog()->error('ERROR: ' . $e);
-//		}
+		} catch (Exception $e) {
+			$this->getLog()->error('ERROR: ' . $e);
+		}
 	}
 
-	public function readmail()
+	public function readmail($id)
 	{
 		try {
-			$messageId = Input::get('messageId', null);
-
-			if (isset($messageId)) {
+			if (isset($id)) {
 				// UPDATE READDATE INTO MESSAGES TABLE
+				$this->getLog()->info('READING MESSAGEID: %s', array($id));
 
-				header('Content-Type', 'image/png');
-				$image = File::get(public_path('images/blank.png'));
+				$data = Crypt::decrypt($id);
+				$this->saveData($data);
 
-				return $image;
+				$image = public_path('images/blank.png');
+				ApiController::returnImage($image);
 			}
 		} catch (Exception $e) {
-			$this->getLog()->error('ERROR: {}', $e->getMessage());
+			$this->getLog()->error('ERROR: ' . $e->getMessage());
 		}
+	}
+
+	public function saveData($data)
+	{
+		if (count($data) < 0 || isset($data) || $data == '') {
+			$this->getLog()->error('ERROR: EMPTY DATA');
+		}
+
+		$data   = explode('|', $data);
+		$msg    = 'REGISTER DATA:';
+		$lenght = count($data);
+		for ($i = 0; $i < $lenght; $i++) {
+			$msg .= ' %s';
+		}
+
+		$logger = new MessageLog('sntconsultores_reader');
+		$logger->info($msg, $data);
 	}
 }

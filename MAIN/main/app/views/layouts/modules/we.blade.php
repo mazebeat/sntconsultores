@@ -1,4 +1,4 @@
-<div class="why-us">
+<div class="why-us" id="why-us">
 	<div class="w-container">
 		<div class="headline-div-block">
 			<h4 class="headerline-section small">Quienes somos?</h4>

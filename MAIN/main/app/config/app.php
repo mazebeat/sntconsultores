@@ -13,7 +13,7 @@ return array(
 	|
 	*/
 
-	'debug'           => true,
+	'debug'           => false,
 	/*
 	|--------------------------------------------------------------------------
 	| Application URL
@@ -37,7 +37,7 @@ return array(
 	|
 	*/
 
-	'timezone'        => 'UTC',
+	'timezone'        => 'America/Santiago',
 	/*
 	|--------------------------------------------------------------------------
 	| Application Locale Configuration
@@ -118,7 +118,10 @@ return array(
 			'Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider',
 			'Barryvdh\VendorCleanup\VendorCleanupServiceProvider',
 			'Barryvdh\Queue\AsyncServiceProvider',
-			'Way\Generators\GeneratorsServiceProvider',),
+			'Way\Generators\GeneratorsServiceProvider',
+			'Ipunkt\LaravelAnalytics\AnalyticsServiceProvider',
+
+	),
 	/*
 	|--------------------------------------------------------------------------
 	| Service Provider Manifest
@@ -185,6 +188,7 @@ return array(
 			'View'              => 'Illuminate\Support\Facades\View',
 			'Flash'             => 'Laracasts\Flash\Flash',
 			'Debugbar'          => 'Barryvdh\Debugbar\Facade',
+			'Analytics' => 'Ipunkt\LaravelAnalytics\AnalyticsFacade'
 
 	),
 

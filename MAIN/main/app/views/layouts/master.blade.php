@@ -4,7 +4,7 @@
 	@include('layouts.modules.assets.bodyHead')
 	@yield('script-text')
 </head>
-<body id="page-top" data-spy="scroll" data-target=".navbar">
+<body id="page-top" data-spy="scroll" data-target=".navbar">{{ Analytics::render() }}
 
 {{--BEGIN NAVBAR--}}
 @include('layouts.modules.navbar')
@@ -97,5 +97,9 @@
 {{--BEGIN ASSETS JS FOOTER--}}
 @include('layouts.modules.assets.bodyFooter')
 {{--END ASSETS JS FOOTER--}}
+
+{{--BEGIN SCROLL UP--}}
+<a href="#" id="scrollToTop" class="scrollToTop"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-arrow-up fa-inverse fa-1x"></i></span></a>
+{{--END SCROLL UP--}}
 </body>
 </html>

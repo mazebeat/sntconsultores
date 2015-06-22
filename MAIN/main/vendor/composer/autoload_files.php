@@ -8,10 +8,10 @@ $baseDir = dirname($vendorDir);
 return array(
     $vendorDir . '/ircmaxell/password-compat/lib/password.php',
     $vendorDir . '/swiftmailer/swiftmailer/lib/swift_required.php',
-    $vendorDir . '/symfony/var-dumper/Resources/functions/dump.php',
     $vendorDir . '/phpseclib/phpseclib/phpseclib/Crypt/Random.php',
-    $vendorDir . '/guzzlehttp/streams/src/functions.php',
+    $vendorDir . '/symfony/var-dumper/Resources/functions/dump.php',
     $vendorDir . '/laravel/framework/src/Illuminate/Support/helpers.php',
+    $vendorDir . '/guzzlehttp/streams/src/functions.php',
     $vendorDir . '/barryvdh/laravel-debugbar/src/helpers.php',
     $vendorDir . '/guzzlehttp/guzzle/src/functions.php',
 );

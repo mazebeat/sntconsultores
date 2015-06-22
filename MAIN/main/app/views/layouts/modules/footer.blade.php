@@ -7,7 +7,7 @@
 				</div>
 				<div class="w-col w-col-9 w-col-stack navi">
 					<div class="w-nav-menu footer navigation" role="navigation">
-						<a class="w-nav-link link-page" href="index.html">Inicio</a><a class="w-nav-link link-page" href="contact-2.html">Contact</a>
+						<a class="w-nav-link link-page" href="{{ URL::to('/')  }}">Inicio</a> <a id="footer_contact" class="w-nav-link link-page" href="#">Contact</a>
 					</div>
 				</div>
 			</div>

@@ -1,4 +1,4 @@
-<div class="contact-section">
+<div id="contact" class="contact-section">
 	{{--<div class="w-widget w-widget-map mapp" data-widget-latlng="-33.43348,-70.6156029" data-widget-style="roadmap" data-widget-zoom="15"></div>--}}
 	<div class="w-container">
 		<div class="w-row">

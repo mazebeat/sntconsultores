@@ -11,8 +11,8 @@
 
 namespace Monolog\Handler;
 
-use Monolog\Logger;
 use Monolog\Formatter\LineFormatter;
+use Monolog\Logger;
 
 /**
  * Sends notifications through Slack API
@@ -114,18 +114,43 @@ class SlackHandler extends SocketHandler
     }
 
     /**
-     * Builds the assets of API call
+     * {@inheritdoc}
+     *
+     * @param array $record
+     */
+    protected function write(array $record)
+    {
+        parent::write($record);
+        $this->closeSocket();
+    }
+
+    /**
+     * Builds the body of API call
      *
      * @param  array  $record
+     *
      * @return string
      */
     private function buildContent($record)
     {
-        $dataArray = array(
-            'token' => $this->token,
-            'channel' => $this->channel,
-            'username' => $this->username,
-            'text' => '',
+        $dataArray = $this->prepareContentData($record);
+
+        return http_build_query($dataArray);
+    }
+
+    /**
+     * Prepares content data
+     *
+     * @param  array $record
+     *
+     * @return array
+     */
+    protected function prepareContentData($record)
+    {
+        $dataArray = array('token'    => $this->token,
+                           'channel'  => $this->channel,
+                           'username' => $this->username,
+                           'text'     => '',
             'attachments' => array()
         );
 
@@ -172,8 +197,7 @@ class SlackHandler extends SocketHandler
                             $attachment['fields'][] = array(
                                 'title' => $var,
                                 'value' => $val,
-                                'short' => $this->useShortAttachment
-                           );
+                                'short' => $this->useShortAttachment);
                         }
                     }
                 }
@@ -191,8 +215,7 @@ class SlackHandler extends SocketHandler
                             $attachment['fields'][] = array(
                                 'title' => $var,
                                 'value' => $val,
-                                'short' => $this->useShortAttachment
-                           );
+                                'short' => $this->useShortAttachment);
                         }
                     }
                 }
@@ -207,35 +230,7 @@ class SlackHandler extends SocketHandler
             $dataArray['icon_emoji'] = ":{$this->iconEmoji}:";
         }
 
-        return http_build_query($dataArray);
-    }
-
-    /**
-     * Builds the header of the API Call
-     *
-     * @param  string $content
-     * @return string
-     */
-    private function buildHeader($content)
-    {
-        $header = "POST /api/chat.postMessage HTTP/1.1\r\n";
-        $header .= "Host: slack.com\r\n";
-        $header .= "Content-Type: application/x-www-form-urlencoded\r\n";
-        $header .= "Content-Length: " . strlen($content) . "\r\n";
-        $header .= "\r\n";
-
-        return $header;
-    }
-
-    /**
-     * {@inheritdoc}
-     *
-     * @param array $record
-     */
-    protected function write(array $record)
-    {
-        parent::write($record);
-        $this->closeSocket();
+        return $dataArray;
     }
 
     /**
@@ -276,5 +271,23 @@ class SlackHandler extends SocketHandler
         $string = rtrim($string, " |");
 
         return $string;
+    }
+
+    /**
+     * Builds the header of the API Call
+     *
+     * @param  string $content
+     *
+     * @return string
+     */
+    private function buildHeader($content)
+    {
+        $header = "POST /api/chat.postMessage HTTP/1.1\r\n";
+        $header .= "Host: slack.com\r\n";
+        $header .= "Content-Type: application/x-www-form-urlencoded\r\n";
+        $header .= "Content-Length: " . strlen($content) . "\r\n";
+        $header .= "\r\n";
+
+        return $header;
     }
 }

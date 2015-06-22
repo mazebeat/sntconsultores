@@ -15,7 +15,7 @@ return array(
 	|
 	*/
 
-	'driver'     => 'mail',
+	'driver'   => 'smtp',
 	/*
 	|--------------------------------------------------------------------------
 	| SMTP Host Address
@@ -27,8 +27,8 @@ return array(
 	|
 	*/
 
-//	'host'       => 'mail.snt-consultores.net',
-	'host'       => 'smtp.gmail.com',
+	//	'host'       => 'mail.snt-consultores.net',
+	'host'     => 'samurai3.ninjahosting.cl',
 	/*
 	|--------------------------------------------------------------------------
 	| SMTP Host Port
@@ -40,8 +40,8 @@ return array(
 	|
 	*/
 
-//	'port'       => 26,
-	'port'       => 587,
+	'port'     => 26,
+	//	'port'       => 465,
 	/*
 	|--------------------------------------------------------------------------
 	| Global "From" Address
@@ -77,8 +77,7 @@ return array(
 	|
 	*/
 
-//	'username'   => 'contacto@snt-consultores.net',
-	'username'   => 'diego.pintod@gmail.com',
+	'username' => 'contacto@snt-consultores.net',
 	/*
 	|--------------------------------------------------------------------------
 	| SMTP Server Password
@@ -90,8 +89,7 @@ return array(
 	|
 	*/
 
-//	'password'   => 'SnT.#.Correo321',
-	'password'   => 'maze1207',
+	'password' => 'SnT.#.Correo321',
 	/*
 	|--------------------------------------------------------------------------
 	| Sendmail System Path

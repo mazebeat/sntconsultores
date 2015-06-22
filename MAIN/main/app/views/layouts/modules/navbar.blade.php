@@ -2,10 +2,10 @@
 	<div class="w-container">
 		<nav class="w-nav-menu navigation" role="navigation">
 			<div class="w-nav-link2">
-				<div><a class="btn-block nav-link" style="display: block;" href="{{ URL::to('/') }}">INICIO</a></div>
+				<div><a id="nav_home" class="btn-block nav-link" style="display: block;" href="{{ URL::to('/') }}">INICIO</a></div>
 			</div>
 			<div class="w-nav-link2">
-				<div><a class="btn-block nav-link" style="display: block;" href="{{ URL::to('/') }}">CONTACTO</a></div>
+				<div><a id="nav_contact" class="btn-block nav-link" style="display: block;" href="{{ URL::to('#') }}">CONTACTO</a></div>
 			</div>
 			{{--<div class="w-dropdown dropdown" data-delay="0">--}}
 			{{--<div class="w-dropdown-toggle nav-link">--}}

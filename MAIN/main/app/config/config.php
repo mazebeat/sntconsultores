@@ -17,11 +17,11 @@ else {
 
 $ini = parse_ini_file($configFile, true);
 
-if (array_get($ini, 'app.debug') === '1') {
+if (array_get($ini, 'app.debug') == '1' || array_get($ini, 'app.debug') == 'true') {
 	array_set($ini, 'app.debug', (bool)true);
 	Config::set('app.debug', (bool)true);
 }
-else {
+if (array_get($ini, 'app.debug') == '0' || array_get($ini, 'app.debug') == 'false' || array_get($ini, 'app.debug') == '') {
 	array_set($ini, 'app.debug', (bool)false);
 	Config::set('app.debug', (bool)false);
 }

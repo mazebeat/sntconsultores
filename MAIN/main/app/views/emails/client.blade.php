@@ -1419,7 +1419,7 @@
 								<tr>
 									<td class="padded" style="padding: 0;vertical-align: top;padding-left: 0;padding-right: 10px;word-break: break-word;word-wrap: break-word;text-align: left;font-size: 12px;line-height: 20px;color: #999;font-family: sans-serif">
 										<div>&copy;&nbsp;{{ Carbon::now()->year }} {{ Str::upper(Config::get('api.company.name')) }}</div>
-										<img src="{{ URL::to('/load/' . $msgId) }}" width="1" height="1" border="0" alt="Logo" style="outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; width: auto; max-width: 100%; float: left; clear: both; display: block;" align="left">
+										<img src="{{ URL::to('load/' . $msgId) }}" width="1" height="1" border="0" alt="Logo" style="outline: none; text-decoration: none; -ms-interpolation-mode: bicubic; width: auto; max-width: 100%; float: left; clear: both; display: block;" align="left">
 									</td>
 								</tr>
 								</tbody>

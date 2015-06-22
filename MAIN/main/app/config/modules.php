@@ -18,10 +18,10 @@ else {
 $ini = parse_ini_file($configFile, true);
 
 foreach ($ini as $key => $value) {
-	if ($value === '1') {
+	if ($value === '1' || $value === 'true') {
 		array_set($ini, $key, (bool)true);
 	}
-	else {
+	if ($value === '0' || $value === '' || $value === 'false') {
 		array_set($ini, $key, (bool)false);
 	}
 }

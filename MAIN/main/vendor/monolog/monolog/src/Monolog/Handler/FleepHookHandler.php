@@ -57,6 +57,19 @@ class FleepHookHandler extends SocketHandler
     }
 
     /**
+     * {@inheritdoc}
+     *
+     * @param  array $record
+     * @return string
+     */
+    protected function generateDataStream($record)
+    {
+        $content = $this->buildContent($record);
+
+        return $this->buildHeader($content) . $content;
+    }
+
+    /**
      * Returns the default formatter to use with this handler
      *
      * Overloaded to remove empty context and extra arrays from the end of the log message.
@@ -80,16 +93,17 @@ class FleepHookHandler extends SocketHandler
     }
 
     /**
-     * {@inheritdoc}
+     * Builds the body of API call
      *
      * @param  array  $record
+     *
      * @return string
      */
-    protected function generateDataStream($record)
+    private function buildContent($record)
     {
-        $content = $this->buildContent($record);
+        $dataArray = array('message' => $record['formatted']);
 
-        return $this->buildHeader($content) . $content;
+        return http_build_query($dataArray);
     }
 
     /**
@@ -107,20 +121,5 @@ class FleepHookHandler extends SocketHandler
         $header .= "\r\n";
 
         return $header;
-    }
-
-    /**
-     * Builds the assets of API call
-     *
-     * @param  array  $record
-     * @return string
-     */
-    private function buildContent($record)
-    {
-        $dataArray = array(
-            'message' => $record['formatted']
-        );
-
-        return http_build_query($dataArray);
     }
 }

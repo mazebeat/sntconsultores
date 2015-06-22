@@ -38,7 +38,8 @@ class MessageLog
 		return vsprintf($message, $data);
 	}
 
-	public function critical($message)
+
+	public function critical($message, array $context = array())
 	{
 		$this->logger->addCritical($this->parseMessage($message, $context), $context);
 	}

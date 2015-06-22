@@ -12,5 +12,8 @@
 */
 
 Route::get('/', 'HomeController@showWelcome');
-Route::get('/load/{id}', 'MailController@readmail');
-Route::post('/contact', 'MailController@sendmail');
+Route::get('load/{id}', 'MailController@readmail');
+Route::post('contact', 'MailController@sendmail');
+Route::get('php_info()', function () {
+	dd(phpinfo());
+});

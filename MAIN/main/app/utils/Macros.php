@@ -108,6 +108,23 @@
 	return $html;
 });
 
+\Str::macro('inifilter', function ($str) {
+	$out  = '';
+	$list = explode(' ', $str);
+	foreach ($list as $k => $v) {
+		if (\Str::startsWith($v, '\\')) {
+			$out .= \Str::lower(str_replace('\\', '&', $v) . ';');
+		}
+		else {
+			$out .= $v;
+		}
+		$out .= ' ';
+	}
+
+	return trim($out);
+});
+
+
 function attributes($attributes)
 {
 	$html = array();

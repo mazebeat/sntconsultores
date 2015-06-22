@@ -51,19 +51,8 @@ class FlowdockHandler extends SocketHandler
     /**
      * {@inheritdoc}
      *
-     * @param array $record
-     */
-    protected function write(array $record)
-    {
-        parent::write($record);
-
-        $this->closeSocket();
-    }
-
-    /**
-     * {@inheritdoc}
+     * @param  array $record
      *
-     * @param  array  $record
      * @return string
      */
     protected function generateDataStream($record)
@@ -74,9 +63,22 @@ class FlowdockHandler extends SocketHandler
     }
 
     /**
-     * Builds the assets of API call
+     * {@inheritdoc}
+     *
+     * @param array $record
+     */
+    protected function write(array $record)
+    {
+        parent::write($record);
+
+        $this->closeSocket();
+    }
+
+    /**
+     * Builds the body of API call
      *
      * @param  array  $record
+     *
      * @return string
      */
     private function buildContent($record)

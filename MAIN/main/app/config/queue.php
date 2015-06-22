@@ -15,7 +15,7 @@ return array(
 	|
 	*/
 
-	'default'     => 'sync',
+	'default' => 'async',
 	/*
 	|--------------------------------------------------------------------------
 	| Queue Connections
