@@ -12,46 +12,34 @@
 				@endif
 				{{--1. TITLE1--}}
 				<div class="tp-caption big_white skewfromleftshort randomrotateout tp-resizeme rs-parallaxlevel-10" data-x="center" data-y="180" data-speed="200" data-start="0"
-				     data-easing="Power3.easeInOut"
-				     data-splitin="chars" data-splitout="none" data-elementdelay="0.03" data-endelementdelay="0.03" data-endspeed="200" style="z-index: 5; -webkit-transition: all 0s ease 0s; transition: all 0s ease 0s; min-height: 0px; min-width: 0px; line-height: 60px; border-width: 0px; margin: 0px; padding: 0px; letter-spacing: 1px; font-size: 70px; font-weight: 300; font-family: raleway; text-align:left; color: #ffffff;">{{ Config::get('slider.slider1.title1', '') }}</div>
+				     data-easing="Power3.easeInOut" data-splitin="chars" data-splitout="none" data-elementdelay="0.03" data-endelementdelay="0.03" data-endspeed="200" style="z-index: 5; -webkit-transition: all 0s ease 0s; transition: all 0s ease 0s; min-height: 0px; min-width: 0px; line-height: 60px; border-width: 0px; margin: 0px; padding: 0px; letter-spacing: 1px; font-size: 70px; font-weight: 300; font-family: raleway; text-align:left; color: #ffffff;">{{ Config::get('slider.slider1.title1', '') }}</div>
 				{{--2. TITLE2--}}
 				<div class="tp-caption big_white customin randomrotateout tp-resizeme rs-parallaxlevel-10" data-x="center" data-y="240" data-speed="200" data-start="0"
-				     data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;transformPerspective:600;transformOrigin:50% 50%;"
-				     data-easing="Power3.easeInOut" data-splitin="chars" data-splitout="none" data-endspeed="1200" data-endeasing="Power3.easeIn" style="z-index: 5; -webkit-transition: all 0s ease 0s; transition: all 0s ease 0s; min-height: 0px; min-width: 0px; line-height: 60px; border-width: 0px; margin: 0px; padding: 0px; letter-spacing: 1px; font-size: 70px; font-family: raleway; text-align:left; font-weight:700; color: #ffffff;">{{ Config::get('slider.slider1.title2', '') }}</div>
+				     data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;transformPerspective:600;transformOrigin:50% 50%;" data-easing="Power3.easeInOut" data-splitin="chars" data-splitout="none" data-endspeed="1200" data-endeasing="Power3.easeIn" style="z-index: 5; -webkit-transition: all 0s ease 0s; transition: all 0s ease 0s; min-height: 0px; min-width: 0px; line-height: 60px; border-width: 0px; margin: 0px; padding: 0px; letter-spacing: 1px; font-size: 70px; font-family: raleway; text-align:left; font-weight:700; color: #ffffff;">{{ Config::get('slider.slider1.title2', '') }}</div>
 				{{--3. PENDRIVE--}}
-				<div class="tp-caption sfl stl start randomrotateout tp-resizeme rs-parallaxlevel-10" data-x="200" data-y="530" data-speed="300" data-start="0"
-				     data-easing="Power3.easeOut" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300" data-endeasing="Power1.easeOut" style="z-index: 4; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -0.0025, 0, 0, 0, 1);">{{ HTML::image('images/slider/pendrive2.png', null, array('data-ww' => '101', 'data-hh' => '72', 'style' => 'width: 101px; height: 72px;')) }}
+				<div class="tp-caption sfl stl start randomrotateout tp-resizeme rs-parallaxlevel-10" data-x="200" data-y="530" data-speed="300" data-start="0" data-easing="Power3.easeOut" data-elementdelay="0.1" data-start="500" data-endelementdelay="0.1" data-endspeed="300" data-endeasing="Power1.easeOut" style="z-index: 4; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -0.0025, 0, 0, 0, 1);">{{ HTML::image('images/slider/pendrive2.png', null, array('data-ww' => '101', 'data-hh' => '72', 'style' => 'width: 101px; height: 72px;')) }}
 				</div>
 				{{--4. CELULAR--}}
-				<div class="tp-caption sfl stl start randomrotateout tp-resizeme rs-parallaxlevel-10" data-x="310" data-y="500" data-speed="300" data-start="0" data-easing="Power3.easeInOut" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300" data-endeasing="Power1.easeIn" style="z-index: 4; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -0.0025, 0, 0, 0, 1);">{{ HTML::image('images/slider/celular.png', null, array('data-ww' => '59', 'data-hh' => '118', 'style' => 'width: 59px; height: 118px;')) }}
+				<div class="tp-caption sfl stl start randomrotateout tp-resizeme rs-parallaxlevel-10" data-x="310" data-y="500" data-speed="300" data-start="1000" data-easing="Power3.easeInOut" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300" data-endeasing="Power1.easeIn" style="z-index: 4; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -0.0025, 0, 0, 0, 1);">{{ HTML::image('images/slider/celular.png', null, array('data-ww' => '59', 'data-hh' => '118', 'style' => 'width: 59px; height: 118px;')) }}
 				</div>
 				{{--5. REPORTE--}}
-				<div class="tp-caption sfr str start randomrotateout tp-resizeme rs-parallaxlevel-10" data-x="840" data-y="472" data-speed="300" data-start="0"
-				     data-easing="Power3.easeInOut" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300" data-endeasing="Linear.easeNone" style="z-index: 4; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -0.0025, 0, 0, 0, 1);">{{ HTML::image('images/slider/reporte2.png', null, array('data-ww' => '199', 'data-hh' => '229', 'style' => 'width: 199px; height: 229px;')) }}
+				<div class="tp-caption sfr str start randomrotateout tp-resizeme rs-parallaxlevel-10" data-x="840" data-y="472" data-speed="300" data-start="0" data-easing="Power3.easeInOut" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300" data-start="1600" data-endeasing="Linear.easeNone" style="z-index: 4; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -0.0025, 0, 0, 0, 1);">{{ HTML::image('images/slider/reporte2.png', null, array('data-ww' => '199', 'data-hh' => '229', 'style' => 'width: 199px; height: 229px;')) }}
 				</div>
 				{{--6. CAFE--}}
-				<div class="tp-caption customin sfr str start randomrotateout tp-resizeme rs-parallaxlevel-10"
-				     data-x="790" data-y="450" data-customin="rotationX:;rotationY:0;rotationZ:0;" data-speed="300" data-start="0"
-				     data-easing="Power3.easeInOut" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300" data-endeasing="Linear.easeNone" style="z-index: 4; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -0.0025, 0, 0, 0, 1);">{{ HTML::image('images/slider/cafe.png', null, array('data-ww' => '94', 'data-hh' => '104', 'style' => 'width: 95px; height: 104px;')) }}
+				<div class="tp-caption customin sfr str start randomrotateout tp-resizeme rs-parallaxlevel-10" data-x="790" data-y="450" data-customin="rotationX:;rotationY:0;rotationZ:0;" data-speed="300" data-start="800" data-easing="Power3.easeInOut" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300" data-endeasing="Linear.easeNone" style="z-index: 4; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -0.0025, 0, 0, 0, 1);">{{ HTML::image('images/slider/cafe.png', null, array('data-ww' => '94', 'data-hh' => '104', 'style' => 'width: 95px; height: 104px;')) }}
 				</div>
 				{{--7. NOTEBOOK--}}
 				<div class="tp-caption sfb stt start randomrotateout tp-resizeme rs-parallaxlevel-10"
-				     data-x="center"
-				     data-hoffset="-3" data-y="bottom" data-voffset="-40" data-speed="300" data-start="0"
-				     data-easing="Power0.easeIn" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300" data-endeasing="Linear.easeNone" style="z-index: 4; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -0.0025, 0, 0, 0, 1);">{{ HTML::image('images/slider/notebook4.png', null, array('data-ww' => '470', 'data-hh' => '336', 'style' => 'width: 470px; height: 336px;')) }}</div>
+				     data-x="center" data-hoffset="-3" data-y="bottom" data-voffset="-40" data-speed="300" data-start="1000" data-easing="Power0.easeIn" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300" data-endeasing="Linear.easeNone" style="z-index: 4; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -0.0025, 0, 0, 0, 1);">{{ HTML::image('images/slider/notebook4.png', null, array('data-ww' => '470', 'data-hh' => '336', 'style' => 'width: 470px; height: 336px;')) }}</div>
 				{{--8. MANOS--}}
 				<div class="tp-caption customin sfb stt start randomrotateout tp-resizeme rs-parallaxlevel-10"
 				     data-x="center"
-				     data-hoffset="0"
-				     data-y="bottom" data-voffset="10" data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;transformPerspective:600;transformOrigin:50% 50%;" data-speed="300" data-start="0"
-				     data-easing="Power0.easeIn" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300" data-endeasing="Power3.easeIn" style="z-index: 4; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -0.0025, 0, 0, 0, 1);">{{ HTML::image('images/slider/manos.png', null, array('data-ww' => '289', 'data-hh' => '236', 'style' => 'width: 289px; height: 236px;')) }}</div>
+				     data-hoffset="0" data-y="bottom" data-start="2000" data-voffset="10" data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;transformPerspective:600;transformOrigin:50% 50%;" data-speed="300" data-start="0" data-easing="Power0.easeIn" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="300" data-endeasing="Power3.easeIn" style="z-index: 4; transform: matrix3d(1, 0, 0, 0, 0, 1, 0, 0, 0, 0, 1, -0.0025, 0, 0, 0, 1);">{{ HTML::image('images/slider/manos.png', null, array('data-ww' => '289', 'data-hh' => '236', 'style' => 'width: 289px; height: 236px;')) }}</div>
 				{{--9. BUTTON--}}
 				<div class="tp-caption customin start hidden-sm hidden-xs randomrotateout tp-resizeme rs-parallaxlevel-10"
 				     data-x="center"
-				     data-hoffset="0"
-				     data-y="center" data-voffset="-40" data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;transformPerspective:600;transformOrigin:50% 50%;" data-speed="300" data-start="0"
-				     data-easing="Power3.easeInOut"
-				     data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-endspeed="600" style="z-index: 6;">
+				     data-hoffset="0" data-y="center" data-voffset="-40" data-customin="x:0;y:0;z:0;rotationX:0;rotationY:0;rotationZ:0;scaleX:0;scaleY:0;skewX:0;skewY:0;transformPerspective:600;transformOrigin:50% 50%;" data-speed="300" data-start="0"
+				     data-easing="Power3.easeInOut" data-splitin="none" data-splitout="none" data-elementdelay="0.1" data-endelementdelay="0.1" data-start="2500" data-endspeed="600" style="z-index: 6;">
 					<a id="start-now" class="button" href="#" data-ix="button" style="">DESCUBRE MÁS</a>
 				</div>
 			</li>
@@ -208,18 +196,5 @@
 		videoJsPath: "rs-plugin/videojs/",
 		fullScreenOffsetContainer: ""
 	});
-
-	//	$('#nav_contact').click(function (e) {
-	//		$('html, body').animate({
-	//			scrollTop: ($('#contact').offset().top-40)
-	//		}, 2000);
-	//		e.preventDefault();
-	//	});
-
-	//	(function(){
-	//		$('#starnow').on('click', function() {
-	//			alert('asdasd');
-	//		});
-	//	})();
 </script>
 {{--END REVOLUTION SLIDER--}}
