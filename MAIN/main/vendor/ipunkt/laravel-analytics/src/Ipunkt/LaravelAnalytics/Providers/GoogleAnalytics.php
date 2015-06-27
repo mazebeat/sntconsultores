@@ -86,12 +86,12 @@ class GoogleAnalytics implements AnalyticsProviderInterface
 	 */
 	public function __construct(array $options = array())
 	{
-		$this->trackingId      = array_get($options, 'tracking_id');
-		$this->trackingDomain  = array_get($options, 'tracking_domain', 'auto');
+		$this->trackingId     = array_get($options, 'tracking_id');
+		$this->trackingDomain = array_get($options, 'tracking_domain', 'auto');
 		$this->displayFeatures = array_get($options, 'display_features', false);
-		$this->anonymizeIp     = array_get($options, 'anonymize_ip', false);
-		$this->autoTrack       = array_get($options, 'auto_track', false);
-		$this->debug           = array_get($options, 'debug', false);
+		$this->anonymizeIp    = array_get($options, 'anonymize_ip', false);
+		$this->autoTrack      = array_get($options, 'auto_track', false);
+		$this->debug          = array_get($options, 'debug', false);
 
 		if ($this->trackingId === null) {
 			throw new InvalidArgumentException('Argument tracking_id can not be null');
@@ -292,16 +292,14 @@ class GoogleAnalytics implements AnalyticsProviderInterface
 		$url = isset($params['url']) ? $params['url'] : $defaults['url'];
 		$url = rtrim($url, '?') . '?';
 
-		if (isset($params['url'])) {
+		if (isset($params['url']))
 			unset($params['url']);
-		}
 
-		$params      = array_merge($defaults['params'], $params);
+		$params = array_merge($defaults['params'], $params);
 		$queryParams = [];
 		foreach ($params as $key => $value) {
-			if (!empty($value)) {
+			if (!empty($value))
 				$queryParams[] = sprintf('%s=%s', $key, $value);
-			}
 		}
 
 		return $url . implode('&', $queryParams);
@@ -330,7 +328,7 @@ class GoogleAnalytics implements AnalyticsProviderInterface
 		$trackingCode = "ga('send', 'pageview');";
 
 		if ($page !== null || $title !== null || $hittype !== null) {
-			$page  = ($page === null) ? "window.location.protocol + '//' + window.location.hostname + window.location.pathname + window.location.search" : "'{$page}'";
+			$page = ($page === null) ? "window.location.protocol + '//' + window.location.hostname + window.location.pathname + window.location.search" : "'{$page}'";
 			$title = ($title === null) ? "document.title" : "'{$title}'";
 
 			$trackingCode = "ga('send', {'hitType': '{$hittype}', 'page': {$page}, 'title': '{$title}'});";

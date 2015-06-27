@@ -71,7 +71,7 @@ class BrowserConsoleHandler extends AbstractProcessingHandler
     private static function dump($title, array $dict)
     {
         $script = array();
-        $dict   = array_filter($dict);
+        $dict = array_filter($dict);
         if (empty($dict)) {
             return $script;
         }
@@ -89,7 +89,7 @@ class BrowserConsoleHandler extends AbstractProcessingHandler
 
     private static function call()
     {
-        $args   = func_get_args();
+        $args = func_get_args();
         $method = array_shift($args);
 
         return self::call_array($method, $args);

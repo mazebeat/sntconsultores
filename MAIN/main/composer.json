@@ -14,7 +14,9 @@
 		"barryvdh/laravel-ide-helper": "~1.11",
 		"barryvdh/laravel-async-queue": "0.3.*@dev",
 		"guzzlehttp/guzzle": "~4.0",
-		"ipunkt/laravel-analytics": "~1.1"
+		"ipunkt/laravel-analytics": "~1.1",
+		"healey/robots": "^1.0",
+		"roumen/sitemap": "2.4.*"
 	},
 	"require-dev": {
 		"doctrine/dbal": "2.5.*@dev" ,

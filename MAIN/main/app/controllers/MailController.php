@@ -12,6 +12,7 @@ class MailController extends ApiController
 {
 	public function sendmail()
 	{
+		Analytics::trackEvent('Mail', 'Send mail');
 		try {
 			$rules     = array('name' => 'required', 'email' => 'required|email', 'subject' => 'required', 'message' => 'required');
 			$data      = Input::only('name', 'email', 'subject', 'message');
@@ -55,6 +56,8 @@ class MailController extends ApiController
 
 	public function readmail($id)
 	{
+		Analytics::trackEvent('Mail', 'Read mail');
+
 		try {
 			if (isset($id)) {
 				// UPDATE READDATE INTO MESSAGES TABLE

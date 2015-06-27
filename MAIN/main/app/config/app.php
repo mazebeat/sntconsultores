@@ -120,7 +120,8 @@ return array(
 			'Barryvdh\Queue\AsyncServiceProvider',
 			'Way\Generators\GeneratorsServiceProvider',
 			'Ipunkt\LaravelAnalytics\AnalyticsServiceProvider',
-
+			'Healey\Robots\RobotsServiceProvider',
+			'Roumen\Sitemap\SitemapServiceProvider',
 	),
 	/*
 	|--------------------------------------------------------------------------
@@ -188,7 +189,8 @@ return array(
 			'View'              => 'Illuminate\Support\Facades\View',
 			'Flash'             => 'Laracasts\Flash\Flash',
 			'Debugbar'          => 'Barryvdh\Debugbar\Facade',
-			'Analytics' => 'Ipunkt\LaravelAnalytics\AnalyticsFacade'
+			'Analytics' => 'Ipunkt\LaravelAnalytics\AnalyticsFacade',
+
 
 	),
 

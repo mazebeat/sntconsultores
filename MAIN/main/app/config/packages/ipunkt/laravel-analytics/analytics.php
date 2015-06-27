@@ -25,7 +25,7 @@ return array(
 			/**
 			 * Tracking ID
 			 */
-			'tracking_id'      => 'UA-XXXXXXXX-1',
+			'tracking_id' => 'UA-49240454-2',
 			/**
 			 * Tracking Domain
 			 */
@@ -47,9 +47,7 @@ return array(
 			/**
 			 * Enable the debugging version of the
 			 */
-			'debug'            => false,
-
-		)
+			'debug'       => false,)
 
 	),
 

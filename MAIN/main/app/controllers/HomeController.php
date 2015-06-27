@@ -18,6 +18,8 @@ class HomeController extends ApiController
 
 	public function showWelcome()
 	{
+		Analytics::trackPage();
+		Analytics::trackEvent('Home', 'Click');
 		return View::make('index');
 	}
 

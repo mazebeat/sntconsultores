@@ -2,7 +2,6 @@
 
 /**
  * Interface TrackingBagInterface
- *
  * @package Ipunkt\LaravelAnalytics\Contracts
  */
 interface TrackingBagInterface

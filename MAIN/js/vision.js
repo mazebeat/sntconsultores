@@ -5773,6 +5773,7 @@ $(document).ready(function () {
             $('.left_navigation #content').css('margin-left', '0%');
             $('.left_navigation .tp-banner-container').css('margin-top', '75px');
         }
+
         if ($window.width() >= 980) {
             $('.left_navigation .navbar').addClass('pos-left');
             $('.left_navigation .navbar').find('.left_nav_widget').css('display', 'block');
@@ -5789,37 +5790,53 @@ $(document).ready(function () {
     $(window).resize(checkWidth);
 
     $('#start-now').on('click', function (e) {
-        console.log('start-now');
+        ga('send', 'event', {eventCategory: 'Why-US', eventAction: 'Click'});
         $('html, body').animate({
-            scrollTop: ($('#why-us').offset().top)
-        }, 2000);
+            scrollTop: ($('#why-us').offset().top) - 55
+        }, 1500);
+        e.preventDefault();
+    });
+
+    $('#btnDescubreMas').on('click', function (e) {
+        ga('send', 'event', {eventCategory: 'Testimonials', eventAction: 'Click'});
+        $('html, body').animate({
+            scrollTop: ($('#testimonios').offset().top) - 55
+        }, 1500);
         e.preventDefault();
     });
 
     $('#contact-now').on('click', function (e) {
-        console.log('contact-now');
+        ga('send', 'event', {eventCategory: 'Contact', eventAction: 'Click'});
         $('html, body').animate({
-            scrollTop: ($('#contact').offset().top) - 40
-        }, 2000);
+            scrollTop: ($('#contact').offset().top) - 55
+        }, 1500);
         e.preventDefault();
     });
 
     $('#nav_contact').click(function (e) {
+        ga('send', 'event', {eventCategory: 'Contact', eventAction: 'Click'});
         $('html, body').animate({
-            scrollTop: ($('#contact').offset().top) - 40
-        }, 2000);
+            scrollTop: ($('#contact').offset().top) - 55
+        }, 1500);
         e.preventDefault();
     });
 
     $('#footer_contact').click(function (e) {
+        ga('send', 'event', {eventCategory: 'Contact', eventAction: 'Click'});
         $('html, body').animate({
-            scrollTop: ($('#contact').offset().top) - 40
-        }, 2000);
+            scrollTop: ($('#contact').offset().top) - 55
+        }, 1500);
         e.preventDefault();
     });
 
+    var runned = false;
     //Check to see if the window is top if not then display button
     $(window).scroll(function () {
+        if ($(document).scrollTop() >= 250 && runned == false) {
+            ga('send', 'event', {eventCategory: 'Scrolled 250px', eventAction: 'Scroll'});
+            runned = true;
+        }
+
         if ($(this).scrollTop() > 100) {
             $('.scrollToTop').fadeIn();
         } else {
@@ -5829,7 +5846,8 @@ $(document).ready(function () {
 
     //Click event to scroll to top
     $('.scrollToTop').click(function () {
-        $('html, body').animate({scrollTop: 0}, 800);
+        ga('send', 'event', {eventCategory: 'Home', eventAction: 'Click'});
+        $('html, body').animate({scrollTop: 0}, 1000);
         return false;
     });
 });

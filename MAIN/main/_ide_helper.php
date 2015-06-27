@@ -1,7 +1,7 @@
 <?php
 /**
  * An helper file for Laravel 4, to provide autocomplete information to your IDE
- * Generated for Laravel 4.2.17 on 2015-06-22.
+ * Generated for Laravel 4.2.17 on 2015-06-27.
  *
  * @author Barry vd. Heuvel <barryvdh@gmail.com>
  * @see https://github.com/barryvdh/laravel-ide-helper
@@ -2845,7 +2845,7 @@ namespace {
          * Get a schema builder instance for the connection.
          *
          * @return \Illuminate\Database\Schema\MySqlBuilder
-         * @static
+         * @static 
          */
         public static function getSchemaBuilder()
         {
@@ -2856,7 +2856,7 @@ namespace {
          * Set the query grammar to the default implementation.
          *
          * @return void
-         * @static
+         * @static 
          */
         public static function useDefaultQueryGrammar()
         {
@@ -2868,7 +2868,7 @@ namespace {
          * Set the schema grammar to the default implementation.
          *
          * @return void
-         * @static
+         * @static 
          */
         public static function useDefaultSchemaGrammar()
         {
@@ -2880,7 +2880,7 @@ namespace {
          * Set the query post processor to the default implementation.
          *
          * @return void
-         * @static
+         * @static 
          */
         public static function useDefaultPostProcessor()
         {
@@ -2894,7 +2894,7 @@ namespace {
          * @param string $table
          *
          * @return \Illuminate\Database\Query\Builder
-         * @static
+         * @static 
          */
         public static function table($table)
         {
@@ -3561,7 +3561,7 @@ namespace {
          * Determine whether we're logging queries.
          *
          * @return bool
-         * @static
+         * @static 
          */
         public static function logging()
         {
@@ -6180,13 +6180,13 @@ namespace {
         public static function hasMacro($name){
             return \Illuminate\Html\HtmlBuilder::hasMacro($name);
         }
-        
+
     }
 
 
     class Input extends \Illuminate\Support\Facades\Input
     {
-
+        
         /**
          * Retrieve an input item from the request.
          *
@@ -6200,7 +6200,7 @@ namespace {
         {
             return \Illuminate\Http\Request::input($key, $default);
         }
-
+        
         /**
          * Return the Request instance.
          *
@@ -6210,7 +6210,7 @@ namespace {
         public static function instance(){
             return \Illuminate\Http\Request::instance();
         }
-
+        
         /**
          * Get the request method.
          *
@@ -6220,7 +6220,7 @@ namespace {
         public static function method(){
             return \Illuminate\Http\Request::method();
         }
-
+        
         /**
          * Get the root URL for the application.
          *
@@ -6237,10 +6237,11 @@ namespace {
          * @return string
          * @static
          */
-        public static function url(){
+        public static function url()
+        {
             return \Illuminate\Http\Request::url();
         }
-
+        
         /**
          * Get the full URL for the request.
          *
@@ -6312,30 +6313,33 @@ namespace {
          * @return bool
          * @static
          */
-        public static function ajax(){
+        public static function ajax()
+        {
             return \Illuminate\Http\Request::ajax();
         }
-
+        
         /**
          * Determine if the request is over HTTPS.
          *
          * @return bool
          * @static
          */
-        public static function secure(){
+        public static function secure()
+        {
             return \Illuminate\Http\Request::secure();
         }
-
+        
         /**
          * Returns the client IP address.
          *
          * @return string
          * @static
          */
-        public static function ip(){
+        public static function ip()
+        {
             return \Illuminate\Http\Request::ip();
         }
-
+        
         /**
          * Returns the client IP addresses.
          *
@@ -8341,7 +8345,7 @@ namespace {
 
     class Password extends \Illuminate\Support\Facades\Password
     {
-        
+
         /**
          * Send a password reminder to a user.
          *
@@ -8370,7 +8374,7 @@ namespace {
         {
             return \Illuminate\Auth\Reminders\PasswordBroker::sendReminder($user, $token, $callback);
         }
-        
+
         /**
          * Reset the password for the given token.
          *
@@ -8378,7 +8382,7 @@ namespace {
          * @param \Closure $callback
          *
          * @return mixed
-         * @static
+         * @static 
          */
         public static function reset($credentials, $callback)
         {
@@ -8391,7 +8395,7 @@ namespace {
          * @param \Closure $callback
          *
          * @return void
-         * @static
+         * @static 
          */
         public static function validator($callback)
         {
@@ -8405,7 +8409,7 @@ namespace {
          *
          * @return \Illuminate\Auth\Reminders\RemindableInterface
          * @throws \UnexpectedValueException
-         * @static
+         * @static 
          */
         public static function getUser($credentials)
         {
@@ -8466,7 +8470,7 @@ namespace {
          *
          * @param string $name
          *
-*@return \Barryvdh\Queue\AsyncQueue
+         * @return \Illuminate\Queue\SyncQueue
          * @static 
          */
         public static function connection($name = null){
@@ -8543,59 +8547,14 @@ namespace {
          * Push a new job onto the queue.
          *
          * @param string $job
-         * @param mixed $data
-         * @param string|null $queue
+         * @param mixed  $data
+         * @param string $queue
          *
-*@return int
+         * @return mixed
          * @static
          */
         public static function push($job, $data = '', $queue = null){
-            return \Barryvdh\Queue\AsyncQueue::push($job, $data, $queue);
-        }
-
-        /**
-         * Store the job in the database.
-         *
-         * Returns the id of the job.
-         *
-         * @param string $job
-         * @param mixed $data
-         * @param int    $delay
-         *
-         * @return int
-         * @static
-         */
-        public static function storeJob($job, $data, $delay = 0){
-            return \Barryvdh\Queue\AsyncQueue::storeJob($job, $data, $delay);
-        }
-
-        /**
-         * Make a Process for the Artisan command for the job id.
-         *
-         * @param int $jobId
-         * @param int $delay
-         *
-         * @return void
-         * @static
-         */
-        public static function startProcess($jobId, $delay = 0)
-        {
-            \Barryvdh\Queue\AsyncQueue::startProcess($jobId, $delay);
-        }
-        
-        /**
-         * Push a new job onto the queue after a delay.
-         *
-         * @param \DateTime|int $delay
-         * @param string        $job
-         * @param mixed         $data
-         * @param string|null   $queue
-         * @return int
-         * @static
-         */
-        public static function later($delay, $job, $data = '', $queue = null)
-        {
-            return \Barryvdh\Queue\AsyncQueue::later($delay, $job, $data, $queue);
+            return \Illuminate\Queue\SyncQueue::push($job, $data, $queue);
         }
 
         /**
@@ -8610,21 +8569,36 @@ namespace {
          */
         public static function pushRaw($payload, $queue = null, $options = array())
         {
-            //Method inherited from \Illuminate\Queue\SyncQueue            
-            return \Barryvdh\Queue\AsyncQueue::pushRaw($payload, $queue, $options);
+            return \Illuminate\Queue\SyncQueue::pushRaw($payload, $queue, $options);
+        }
+        
+        /**
+         * Push a new job onto the queue after a delay.
+         *
+         * @param \DateTime|int $delay
+         * @param string        $job
+         * @param mixed         $data
+         * @param string        $queue
+         *
+         * @return mixed
+         * @static
+         */
+        public static function later($delay, $job, $data = '', $queue = null)
+        {
+            return \Illuminate\Queue\SyncQueue::later($delay, $job, $data, $queue);
         }
         
         /**
          * Pop the next job off of the queue.
          *
          * @param string $queue
+         *
          * @return \Illuminate\Queue\Jobs\Job|null
          * @static
          */
         public static function pop($queue = null)
         {
-            //Method inherited from \Illuminate\Queue\SyncQueue            
-            return \Barryvdh\Queue\AsyncQueue::pop($queue);
+            return \Illuminate\Queue\SyncQueue::pop($queue);
         }
         
         /**
@@ -8636,7 +8610,7 @@ namespace {
         public static function marshal()
         {
             //Method inherited from \Illuminate\Queue\Queue            
-            return \Barryvdh\Queue\AsyncQueue::marshal();
+            return \Illuminate\Queue\SyncQueue::marshal();
         }
         
         /**
@@ -8645,13 +8619,14 @@ namespace {
          * @param array $jobs
          * @param mixed $data
          * @param string $queue
-         * @return mixed 
+         *
+         * @return mixed
          * @static 
          */
         public static function bulk($jobs, $data = '', $queue = null)
         {
             //Method inherited from \Illuminate\Queue\Queue            
-            return \Barryvdh\Queue\AsyncQueue::bulk($jobs, $data, $queue);
+            return \Illuminate\Queue\SyncQueue::bulk($jobs, $data, $queue);
         }
         
         /**
@@ -8663,33 +8638,35 @@ namespace {
         public static function getTime()
         {
             //Method inherited from \Illuminate\Queue\Queue            
-            return \Barryvdh\Queue\AsyncQueue::getTime();
+            return \Illuminate\Queue\SyncQueue::getTime();
         }
         
         /**
          * Set the IoC container instance.
          *
          * @param \Illuminate\Container\Container $container
-         * @return void 
+         *
+         * @return void
          * @static 
          */
         public static function setContainer($container)
         {
             //Method inherited from \Illuminate\Queue\Queue            
-            \Barryvdh\Queue\AsyncQueue::setContainer($container);
+            \Illuminate\Queue\SyncQueue::setContainer($container);
         }
         
         /**
          * Set the encrypter instance.
          *
          * @param \Illuminate\Encryption\Encrypter $crypt
-         * @return void 
+         *
+         * @return void
          * @static 
          */
         public static function setEncrypter($crypt)
         {
             //Method inherited from \Illuminate\Queue\Queue            
-            \Barryvdh\Queue\AsyncQueue::setEncrypter($crypt);
+            \Illuminate\Queue\SyncQueue::setEncrypter($crypt);
         }
         
     }
@@ -10844,26 +10821,25 @@ namespace {
          * @return \Illuminate\Http\Response 
          * @static 
          */
-        public static function handle($request, $type = 1, $catch = true){
+        public static function handle($request, $type = 1, $catch = true)
+        {
             return \Illuminate\Routing\Router::handle($request, $type, $catch);
         }
 
     }
 
 
-    class Schema extends \Illuminate\Support\Facades\Schema
-    {
-        
+    class Schema extends \Illuminate\Support\Facades\Schema{
+
         /**
          * Determine if the given table exists.
          *
          * @param string $table
          *
          * @return bool
-         * @static
+         * @static 
          */
-        public static function hasTable($table)
-        {
+        public static function hasTable($table){
             return \Illuminate\Database\Schema\MySqlBuilder::hasTable($table);
         }
         
@@ -10873,10 +10849,9 @@ namespace {
          * @param string $table
          *
          * @return array
-         * @static
+         * @static 
          */
-        public static function getColumnListing($table)
-        {
+        public static function getColumnListing($table){
             return \Illuminate\Database\Schema\MySqlBuilder::getColumnListing($table);
         }
         
@@ -10887,14 +10862,13 @@ namespace {
          * @param string $column
          *
          * @return bool
-         * @static
+         * @static 
          */
-        public static function hasColumn($table, $column)
-        {
+        public static function hasColumn($table, $column){
             //Method inherited from \Illuminate\Database\Schema\Builder            
             return \Illuminate\Database\Schema\MySqlBuilder::hasColumn($table, $column);
         }
-        
+
         /**
          * Modify a table on the schema.
          *
@@ -10902,14 +10876,13 @@ namespace {
          * @param \Closure $callback
          *
          * @return \Illuminate\Database\Schema\Blueprint
-         * @static
+         * @static 
          */
-        public static function table($table, $callback)
-        {
+        public static function table($table, $callback){
             //Method inherited from \Illuminate\Database\Schema\Builder            
             return \Illuminate\Database\Schema\MySqlBuilder::table($table, $callback);
         }
-        
+
         /**
          * Create a new table on the schema.
          *
@@ -10917,38 +10890,35 @@ namespace {
          * @param \Closure $callback
          *
          * @return \Illuminate\Database\Schema\Blueprint
-         * @static
+         * @static 
          */
-        public static function create($table, $callback)
-        {
+        public static function create($table, $callback){
             //Method inherited from \Illuminate\Database\Schema\Builder            
             return \Illuminate\Database\Schema\MySqlBuilder::create($table, $callback);
         }
-        
+
         /**
          * Drop a table from the schema.
          *
          * @param string $table
          *
          * @return \Illuminate\Database\Schema\Blueprint
-         * @static
+         * @static 
          */
-        public static function drop($table)
-        {
+        public static function drop($table){
             //Method inherited from \Illuminate\Database\Schema\Builder            
             return \Illuminate\Database\Schema\MySqlBuilder::drop($table);
         }
-        
+
         /**
          * Drop a table from the schema if it exists.
          *
          * @param string $table
          *
          * @return \Illuminate\Database\Schema\Blueprint
-         * @static
+         * @static 
          */
-        public static function dropIfExists($table)
-        {
+        public static function dropIfExists($table){
             //Method inherited from \Illuminate\Database\Schema\Builder            
             return \Illuminate\Database\Schema\MySqlBuilder::dropIfExists($table);
         }
@@ -10960,22 +10930,20 @@ namespace {
          * @param string $to
          *
          * @return \Illuminate\Database\Schema\Blueprint
-         * @static
+         * @static 
          */
-        public static function rename($from, $to)
-        {
+        public static function rename($from, $to){
             //Method inherited from \Illuminate\Database\Schema\Builder            
             return \Illuminate\Database\Schema\MySqlBuilder::rename($from, $to);
         }
-        
+
         /**
          * Get the database connection instance.
          *
          * @return \Illuminate\Database\Connection
-         * @static
+         * @static 
          */
-        public static function getConnection()
-        {
+        public static function getConnection(){
             //Method inherited from \Illuminate\Database\Schema\Builder            
             return \Illuminate\Database\Schema\MySqlBuilder::getConnection();
         }
@@ -10986,24 +10954,22 @@ namespace {
          * @param \Illuminate\Database\Connection
          *
          * @return $this
-         * @static
+         * @static 
          */
-        public static function setConnection($connection)
-        {
+        public static function setConnection($connection){
             //Method inherited from \Illuminate\Database\Schema\Builder            
             return \Illuminate\Database\Schema\MySqlBuilder::setConnection($connection);
         }
-        
+
         /**
          * Set the Schema Blueprint resolver callback.
          *
          * @param \Closure $resolver
          *
          * @return void
-         * @static
+         * @static 
          */
-        public static function blueprintResolver($resolver)
-        {
+        public static function blueprintResolver($resolver){
             //Method inherited from \Illuminate\Database\Schema\Builder            
             \Illuminate\Database\Schema\MySqlBuilder::blueprintResolver($resolver);
         }
@@ -11552,7 +11518,8 @@ namespace {
     }
 
 
-    class SSH extends \Illuminate\Support\Facades\SSH{
+    class SSH extends \Illuminate\Support\Facades\SSH
+    {
 
         /**
          * Get a remote connection instance.
@@ -12822,8 +12789,7 @@ namespace {
     }
 
 
-    class Analytics extends \Ipunkt\LaravelAnalytics\AnalyticsFacade
-    {
+    class Analytics extends \Ipunkt\LaravelAnalytics\AnalyticsFacade{
         
         /**
          * track an page view
@@ -12833,13 +12799,12 @@ namespace {
          * @param null|string $hittype
          *
          * @return void
-         * @static
+         * @static 
          */
-        public static function trackPage($page = null, $title = null, $hittype = null)
-        {
+        public static function trackPage($page = null, $title = null, $hittype = null){
             \Ipunkt\LaravelAnalytics\Providers\GoogleAnalytics::trackPage($page, $title, $hittype);
         }
-        
+
         /**
          * track an event
          *
@@ -12850,114 +12815,104 @@ namespace {
          *
          * @static
          */
-        public static function trackEvent($category, $action, $label = null, $value = null)
-        {
+        public static function trackEvent($category, $action, $label = null, $value = null){
             return \Ipunkt\LaravelAnalytics\Providers\GoogleAnalytics::trackEvent($category, $action, $label, $value);
         }
-        
+
         /**
          * track any custom code
          *
          * @param string $customCode
          *
          * @return void
-         * @static
+         * @static 
          */
-        public static function trackCustom($customCode)
-        {
+        public static function trackCustom($customCode){
             \Ipunkt\LaravelAnalytics\Providers\GoogleAnalytics::trackCustom($customCode);
         }
-        
+
         /**
          * enable display features
          *
          * @return \Ipunkt\LaravelAnalytics\Providers\GoogleAnalytics
-         * @static
+         * @static 
          */
-        public static function enableDisplayFeatures()
-        {
+        public static function enableDisplayFeatures(){
             return \Ipunkt\LaravelAnalytics\Providers\GoogleAnalytics::enableDisplayFeatures();
         }
-        
+
         /**
          * disable display features
          *
          * @return \Ipunkt\LaravelAnalytics\Providers\GoogleAnalytics
-         * @static
+         * @static 
          */
-        public static function disableDisplayFeatures()
-        {
+        public static function disableDisplayFeatures(){
             return \Ipunkt\LaravelAnalytics\Providers\GoogleAnalytics::disableDisplayFeatures();
         }
-        
+
         /**
          * enable auto tracking
          *
          * @return \Ipunkt\LaravelAnalytics\Providers\GoogleAnalytics
-         * @static
+         * @static 
          */
-        public static function enableAutoTracking()
-        {
+        public static function enableAutoTracking(){
             return \Ipunkt\LaravelAnalytics\Providers\GoogleAnalytics::enableAutoTracking();
         }
-        
+
         /**
          * disable auto tracking
          *
          * @return \Ipunkt\LaravelAnalytics\Providers\GoogleAnalytics
-         * @static
+         * @static 
          */
-        public static function disableAutoTracking()
-        {
+        public static function disableAutoTracking(){
             return \Ipunkt\LaravelAnalytics\Providers\GoogleAnalytics::disableAutoTracking();
         }
-        
+
         /**
          * returns the javascript embedding code
          *
          * @return string
-         * @static
+         * @static 
          */
-        public static function render()
-        {
+        public static function render(){
             return \Ipunkt\LaravelAnalytics\Providers\GoogleAnalytics::render();
         }
         
         /**
          * sets or gets nonInteraction
-         *
+         * 
          * setting: $this->nonInteraction(true)->render();
          * getting: if ($this->nonInteraction()) echo 'non-interaction set';
          *
          * @param boolean|null $value
          *
          * @return bool|$this
-         * @static
+         * @static 
          */
-        public static function nonInteraction($value = null)
-        {
+        public static function nonInteraction($value = null){
             return \Ipunkt\LaravelAnalytics\Providers\GoogleAnalytics::nonInteraction($value);
         }
-        
+
         /**
          * make the tracking measurement url unsecure
          *
          * @return $this
-         * @static
+         * @static 
          */
-        public static function unsecureMeasurementUrl()
-        {
+        public static function unsecureMeasurementUrl(){
             return \Ipunkt\LaravelAnalytics\Providers\GoogleAnalytics::unsecureMeasurementUrl();
         }
-        
+
         /**
          * use the secured version of the tracking measurement url
          *
          * @return $this
-         * @static
+         * @static 
          */
-        public static function secureMeasurementUrl()
-        {
+        public static function secureMeasurementUrl(){
             return \Ipunkt\LaravelAnalytics\Providers\GoogleAnalytics::secureMeasurementUrl();
         }
         
@@ -12977,9 +12932,118 @@ namespace {
          * @experimental
          * @static
          */
-        public static function trackMeasurementUrl($metricName, $metricValue, $event, $campaign, $clientId = null, $params = array())
-        {
+        public static function trackMeasurementUrl($metricName, $metricValue, $event, $campaign, $clientId = null, $params = array()){
             return \Ipunkt\LaravelAnalytics\Providers\GoogleAnalytics::trackMeasurementUrl($metricName, $metricValue, $event, $campaign, $clientId, $params);
+        }
+
+    }
+
+
+    class Robots extends \Healey\Robots\RobotsFacade
+    {
+        
+        /**
+         * Generate the robots.txt2 data.
+         *
+         * @return string
+         * @static
+         */
+        public static function generate()
+        {
+            return \Healey\Robots\Robots::generate();
+        }
+        
+        /**
+         * Add a Sitemap to the robots.txt2.
+         *
+         * @param string $sitemap
+         *
+         * @static
+         */
+        public static function addSitemap($sitemap)
+        {
+            return \Healey\Robots\Robots::addSitemap($sitemap);
+        }
+        
+        /**
+         * Add a User-agent to the robots.txt2.
+         *
+         * @param string $userAgent
+         *
+         * @static
+         */
+        public static function addUserAgent($userAgent)
+        {
+            return \Healey\Robots\Robots::addUserAgent($userAgent);
+        }
+        
+        /**
+         * Add a Host to the robots.txt2.
+         *
+         * @param string $host
+         *
+         * @static
+         */
+        public static function addHost($host)
+        {
+            return \Healey\Robots\Robots::addHost($host);
+        }
+        
+        /**
+         * Add a disallow rule to the robots.txt2.
+         *
+         * @param string|array $directories
+         *
+         * @static
+         */
+        public static function addDisallow($directories)
+        {
+            return \Healey\Robots\Robots::addDisallow($directories);
+        }
+        
+        /**
+         * Add a allow rule to the robots.txt2.
+         *
+         * @param string|array $directories
+         *
+         * @static
+         */
+        public static function addAllow($directories)
+        {
+            return \Healey\Robots\Robots::addAllow($directories);
+        }
+        
+        /**
+         * Add a comment to the robots.txt2.
+         *
+         * @param string $comment
+         *
+         * @static
+         */
+        public static function addComment($comment)
+        {
+            return \Healey\Robots\Robots::addComment($comment);
+        }
+        
+        /**
+         * Add a spacer to the robots.txt2.
+         *
+         * @static
+         */
+        public static function addSpacer()
+        {
+            return \Healey\Robots\Robots::addSpacer();
+        }
+        
+        /**
+         * Reset the lines.
+         *
+         * @return void
+         * @static
+         */
+        public static function reset()
+        {
+            \Healey\Robots\Robots::reset();
         }
         
     }

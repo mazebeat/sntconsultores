@@ -196,7 +196,6 @@ class Logger implements LoggerInterface
      * Adds a processor on to the stack.
      *
      * @param callable $callback
-     *
      * @return $this
      */
     public function pushProcessor($callback)
@@ -205,7 +204,6 @@ class Logger implements LoggerInterface
             throw new \InvalidArgumentException('Processors must be valid callables (callback or object with an __invoke method), '.var_export($callback, true).' given');
         }
         array_unshift($this->processors, $callback);
-
         return $this;
     }
 
@@ -236,6 +234,7 @@ class Logger implements LoggerInterface
      *
      * @param  string $message The log message
      * @param  array  $context The log context
+     *
      * @return Boolean Whether the record has been processed
      */
     public function addDebug($message, array $context = array())
@@ -301,13 +300,11 @@ class Logger implements LoggerInterface
      * Pushes a handler on to the stack.
      *
      * @param HandlerInterface $handler
-     *
      * @return $this
      */
     public function pushHandler(HandlerInterface $handler)
     {
         array_unshift($this->handlers, $handler);
-
         return $this;
     }
 
@@ -439,7 +436,7 @@ class Logger implements LoggerInterface
      * @param  string  $message The log message
      * @param  array   $context The log context
      *
-*@return Boolean Whether the record has been processed
+     * @return Boolean Whether the record has been processed
      */
     public function warn($message, array $context = array())
     {
@@ -454,7 +451,7 @@ class Logger implements LoggerInterface
      * @param  string  $message The log message
      * @param  array   $context The log context
      *
-*@return Boolean Whether the record has been processed
+     * @return Boolean Whether the record has been processed
      */
     public function err($message, array $context = array())
     {
@@ -469,7 +466,7 @@ class Logger implements LoggerInterface
      * @param  string  $message The log message
      * @param  array   $context The log context
      *
-*@return Boolean Whether the record has been processed
+     * @return Boolean Whether the record has been processed
      */
     public function crit($message, array $context = array())
     {
@@ -569,7 +566,7 @@ class Logger implements LoggerInterface
      * @param  string  $message The log message
      * @param  array   $context The log context
      *
-*@return Boolean Whether the record has been processed
+     * @return Boolean Whether the record has been processed
      */
     public function log($level, $message, array $context = array())
     {
@@ -610,7 +607,6 @@ class Logger implements LoggerInterface
      * Converts PSR-3 levels to Monolog ones if necessary
      *
      * @param string|int Level number (monolog) or name (PSR-3)
-     *
      * @return int
      */
     public static function toMonologLevel($level)

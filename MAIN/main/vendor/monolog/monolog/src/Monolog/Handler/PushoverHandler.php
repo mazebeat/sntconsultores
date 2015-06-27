@@ -105,7 +105,6 @@ class PushoverHandler extends SocketHandler
 
     /**
      * Use the formatted message?
-     *
      * @param boolean $value
      */
     public function useFormattedMessage($value)

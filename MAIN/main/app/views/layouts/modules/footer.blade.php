@@ -1,3 +1,4 @@
+<div class="clearfix"></div>
 <div class="footer-big" style="padding-top: 0px;">
 	<div class="footer-small" id="Footer">
 		<div class="w-container">

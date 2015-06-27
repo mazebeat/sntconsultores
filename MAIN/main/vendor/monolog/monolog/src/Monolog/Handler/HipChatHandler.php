@@ -191,12 +191,11 @@ class HipChatHandler extends SocketHandler
      * Builds the body of API call
      *
      * @param  array  $record
-     *
      * @return string
      */
     private function buildContent($record)
     {
-        $dataArray = array('notify' => $this->version == self::API_V1 ? ($this->notify ? 1 : 0) : ($this->notify ? 'true' : 'false'),
+        $dataArray             = array('notify' => $this->version == self::API_V1 ? ($this->notify ? 1 : 0) : ($this->notify ? 'true' : 'false'),
             'message' => $record['formatted'],
             'message_format' => $this->format,
             'color' => $this->getAlertColor($record['level']),
@@ -205,7 +204,7 @@ class HipChatHandler extends SocketHandler
         // if we are using the legacy API then we need to send some additional information
         if ($this->version == self::API_V1) {
             $dataArray['room_id'] = $this->room;
-            $dataArray['from']    = $this->name;
+            $dataArray['from'] = $this->name;
         }
 
         return http_build_query($dataArray);
@@ -237,7 +236,6 @@ class HipChatHandler extends SocketHandler
      * Builds the header of the API Call
      *
      * @param  string $content
-     *
      * @return string
      */
     private function buildHeader($content)
@@ -247,7 +245,7 @@ class HipChatHandler extends SocketHandler
         }
         else {
             // needed for rooms with special (spaces, etc) characters in the name
-            $room   = rawurlencode($this->room);
+            $room = rawurlencode($this->room);
             $header = "POST /v2/room/{$room}/notification?auth_token={$this->token} HTTP/1.1\r\n";
         }
 

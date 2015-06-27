@@ -48,10 +48,10 @@ class CustomEvents
 	public function login($user)
 	{
 		if (\Config::get('config.logs.path') != '') {
-			$this->logFile = \Config::get('config.logs.path') . 'users.log';
+			$this->logFile = \Config::get('config.logs.path') . 'sntconsultores_users.log';
 		}
 		else {
-			$this->logFile = storage_path() . '/logs/users.log';
+			$this->logFile = storage_path() . '/logs/sntconsultores_users.log';
 		}
 		$this->logMsg = 'LOGIN OK | USER-ID ' . $user->id . ' | IP-ADDRESS ' . array_get($this->info_server, 'IP') . ' | BROWSER ' . array_get($this->info_server, 'BROWSER') . PHP_EOL;
 		$this->monolog->pushHandler(new StreamHandler($this->logFile), Logger::INFO);
@@ -64,7 +64,7 @@ class CustomEvents
 	public function loginFailed($user)
 	{
 		if (\Config::get('config.logs.path') != '') {
-			$this->logFile = \Config::get('config.logs.path') . 'users.log';
+			$this->logFile = \Config::get('config.logs.path') . 'sntconsultores_users.log';
 		}
 		else {
 			$this->logFile = storage_path() . '/logs/users.log';
@@ -80,10 +80,10 @@ class CustomEvents
 	public function logout($user)
 	{
 		if (\Config::get('config.logs.path') != '') {
-			$this->logFile = \Config::get('config.logs.path') . 'users.log';
+			$this->logFile = \Config::get('config.logs.path') . 'sntconsultores_users.log';
 		}
 		else {
-			$this->logFile = storage_path() . '/logs/users.log';
+			$this->logFile = storage_path() . '/logs/sntconsultores_users.log';
 		}
 		$this->logFile = storage_path() . '/logs/users.log';
 		$this->logMsg  = 'LOGOUT | USER-ID ' . $user->id . ' | IP-ADDRESS ' . array_get($this->info_server, 'IP') . ' | BROWSER ' . array_get($this->info_server, 'BROWSER') . PHP_EOL;
@@ -99,10 +99,10 @@ class CustomEvents
 	public function database($sql, $bindings, $time)
 	{
 		if (\Config::get('config.logs.path') != '') {
-			$this->logFile = \Config::get('config.logs.path') . 'database.log';
+			$this->logFile = \Config::get('config.logs.path') . 'sntconsultores_database.log';
 		}
 		else {
-			$this->logFile = storage_path() . '/logs/database.log';
+			$this->logFile = storage_path() . '/logs/sntconsultores_database.log';
 		}
 		$sql          = str_replace(array(
 			                            '%',

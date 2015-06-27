@@ -128,7 +128,6 @@ class SlackHandler extends SocketHandler
      * Builds the body of API call
      *
      * @param  array  $record
-     *
      * @return string
      */
     private function buildContent($record)
@@ -142,7 +141,6 @@ class SlackHandler extends SocketHandler
      * Prepares content data
      *
      * @param  array $record
-     *
      * @return array
      */
     protected function prepareContentData($record)
@@ -229,7 +227,6 @@ class SlackHandler extends SocketHandler
         if ($this->iconEmoji) {
             $dataArray['icon_emoji'] = ":{$this->iconEmoji}:";
         }
-
         return $dataArray;
     }
 
@@ -277,7 +274,6 @@ class SlackHandler extends SocketHandler
      * Builds the header of the API Call
      *
      * @param  string $content
-     *
      * @return string
      */
     private function buildHeader($content)

@@ -52,19 +52,10 @@ class SwiftMailerHandler extends MailHandler
     }
 
     /**
-     * {@inheritdoc}
-     */
-    protected function send($content, array $records)
-    {
-        $this->mailer->send($this->buildMessage($content, $records));
-    }
-
-    /**
      * Creates instance of Swift_Message to be sent
      *
      * @param string $content formatted email body to be sent
      * @param array  $records Log records that formed the content
-     *
      * @return \Swift_Message
      */
     protected function buildMessage($content, array $records)
@@ -84,5 +75,13 @@ class SwiftMailerHandler extends MailHandler
         $message->setDate(time());
 
         return $message;
+    }
+
+    /**
+     * {@inheritdoc}
+     */
+    protected function send($content, array $records)
+    {
+        $this->mailer->send($this->buildMessage($content, $records));
     }
 }

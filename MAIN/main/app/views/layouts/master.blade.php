@@ -4,102 +4,30 @@
 	@include('layouts.modules.assets.bodyHead')
 	@yield('script-text')
 </head>
-<body id="page-top" data-spy="scroll" data-target=".navbar">{{ Analytics::render() }}
+<body id="page-top" data-spy="scroll" data-target=".navbar">
+{{ Analytics::render() }}
+<?php include_once(public_path('analyticstracking.php')) ?>
 
 {{--BEGIN NAVBAR--}}
-@include('layouts.modules.navbar')
+@yield('navbar')
 {{--END NAVBAR--}}
 
 {{--BEGIN REVOLUTION SLIDER--}}
 <article class="">
-	@if(Config::get('modules.slider'))
-		@include('layouts.modules.slider')
-	@endif
-</article>
-{{--END REVOLUTION SLIDER--}}
+	@yield('slider')
+</article>{{--END REVOLUTION SLIDER--}}
 
 {{--BEGIN CONTENT--}}
 <div id="content">
-	{{--BEGIN WE--}}
-	@if(Config::get('modules.we'))
-		@include('layouts.modules.we')
-	@endif
-	{{--END WE--}}
-
-	{{--BEGIN PROJECTS--}}
-	@if(Config::get('modules.proyects'))
-		@include('layouts.modules.proyects')
-	@endif
-	{{--END PROJECTS--}}
-
-	{{--BEGIN WHY_US--}}
-	@if(Config::get('modules.whyUs'))
-		@include('layouts.modules.whyUs')
-	@endif
-	{{--END WHY_US--}}
-
-	{{--BEGIN FACTS--}}
-	@if(Config::get('modules.facts'))
-		@include('layouts.modules.facts')
-	@endif
-	{{--END FACTS--}}
-
-	{{--BEGIN SKILLS--}}
-	@if(Config::get('modules.skills'))
-		@include('layouts.modules.skills')
-	@endif
-	{{--END SKILLS--}}
-
-	{{--BEGIN SERVICIOS--}}
-	@if(Config::get('modules.services'))
-		@include('layouts.modules.services')
-	@endif
-	{{--END SERVICIOS--}}
-
-	{{--BEGIN TEAM--}}
-	@if(Config::get('modules.team'))
-		@include('layouts.modules.team')
-	@endif
-	{{--END TEAM--}}
-
-	{{--BEGIN MEDIA 1--}}
-	@if(Config::get('modules.medias'))
-		@include('layouts.modules.medias.media1')
-	@endif
-	{{--END MEDIA 1--}}
-
-	{{--BEGIN TESTIMONIALS--}}
-	@if(Config::get('modules.testimonials'))
-		@include('layouts.modules.testimonials')
-	@endif
-	{{--END TESTIMONIALS--}}
-
-	{{--BEGIN CLIENTS--}}
-	@if(Config::get('modules.clients'))
-		@include('layouts.modules.clients')
-	@endif
-	{{--END CLIENTS--}}
-</div>
-{{--END CONTENT--}}
-
-{{--BEGIN CONTACT--}}
-@if(Config::get('modules.contact'))
-	@include('layouts.modules.contact')
-@endif
-{{--END CONTACT--}}
+	@yield('content')
+</div>{{--END CONTENT--}}
 
 {{--BEGIN FOOTER--}}
-@if(Config::get('modules.footer'))
-	@include('layouts.modules.footer')
-@endif
+@yield('footer')
 {{--END FOOTER--}}
 
 {{--BEGIN ASSETS JS FOOTER--}}
 @include('layouts.modules.assets.bodyFooter')
-{{--END ASSETS JS FOOTER--}}
-
-{{--BEGIN SCROLL UP--}}
-<a href="#" id="scrollToTop" class="scrollToTop"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-arrow-up fa-inverse fa-1x"></i></span></a>
-{{--END SCROLL UP--}}
+{{--END ASSETS JS FOOTER--}}<a href="#" class="scrollToTop"><span class="fa-stack fa-lg"><i class="fa fa-circle fa-stack-2x"></i><i class="fa fa-arrow-up fa-inverse fa-1x"></i></span></a>
 </body>
 </html>

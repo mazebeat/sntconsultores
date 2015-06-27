@@ -45,7 +45,9 @@
         "psr-4": {"Monolog\\": "src/Monolog"}
     },
     "autoload-dev": {
-        "psr-4": { "Monolog\\": "tests/Monolog" }
+        "psr-4": {
+            "Monolog\\": "tests/Monolog"
+        }
     },
     "provide": {
         "psr/log-implementation": "1.0.0"

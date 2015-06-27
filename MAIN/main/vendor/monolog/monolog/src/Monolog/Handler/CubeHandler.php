@@ -74,7 +74,7 @@ class CubeHandler extends AbstractProcessingHandler
             $data['type'] = $record['channel'];
         }
 
-        $data['data']          = $record['context'];
+        $data['data'] = $record['context'];
         $data['data']['level'] = $record['level'];
 
         if ($this->scheme === 'http') {

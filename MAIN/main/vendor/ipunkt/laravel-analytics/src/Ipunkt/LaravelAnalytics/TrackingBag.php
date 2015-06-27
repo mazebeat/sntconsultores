@@ -25,7 +25,7 @@ class TrackingBag implements TrackingBagInterface
 		}
 
 		//	prevent duplicates in session
-		$trackingKey                 = md5($tracking);
+		$trackingKey = md5($tracking);
 		$sessionTracks[$trackingKey] = $tracking;
 
 		Session::flash($this->sessionIdentifier, $sessionTracks);

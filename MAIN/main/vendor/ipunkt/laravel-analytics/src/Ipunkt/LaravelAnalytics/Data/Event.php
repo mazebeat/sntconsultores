@@ -2,7 +2,6 @@
 
 /**
  * Class Event
- *
  * @package Ipunkt\LaravelAnalytics\Data
  */
 class Event

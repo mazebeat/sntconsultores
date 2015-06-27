@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\Crypt;
 /**
  * Class ApiController
  */
-class ApiController extends \BaseController
+class ApiController extends BaseController
 {
 	private $token;
 	private $data;
@@ -182,92 +182,6 @@ class ApiController extends \BaseController
 	}
 
 	/**
-	 * @param      $assoc_arr
-	 * @param      $path
-	 * @param bool $has_sections
-	 *
-	 * @return array (ok, message)
-	 */
-	public static function write_ini_file($assoc_arr, $path, $has_sections = false)
-	{
-		$comments   = '';
-		$content    = '';
-		$oldContent = '';
-
-		if (File::exists($path)) {
-			$old = File::get($path);
-			$old = explode(PHP_EOL, $old);
-
-			foreach ($old as $key => $value) {
-				if (\Str::startsWith($value, ';')) {
-					$comments .= $value . PHP_EOL;
-				}
-				else {
-					$oldContent .= $value . PHP_EOL;
-				}
-			}
-		}
-
-
-		//		dd($has_sections);
-		if ($has_sections) {
-			foreach ($assoc_arr as $key => $value) {
-				if (is_array($value)) {
-					$content .= '[' . $key . ']' . PHP_EOL;
-					foreach ($value as $key2 => $value2) {
-						if (is_array($value2)) {
-							for ($i = 0; $i < count($value2); $i++) {
-								$content .= $key2 . '[] = "' . $value2[$i] . '"' . PHP_EOL;
-							}
-						}
-						else if ($value2 == '') {
-							$content .= $key2 . ' = ' . PHP_EOL;
-						}
-						else {
-							$content .= $key2 . ' = "' . $value2 . '"' . PHP_EOL;
-						}
-					}
-				}
-				else {
-					$content .= $key . ' = "' . $value . '"' . PHP_EOL;
-				}
-			}
-		}
-		else {
-			foreach ($assoc_arr as $key => $value) {
-				if (is_array($value)) {
-					for ($i = 0; $i < count($value); $i++) {
-						$content .= $key . '[] = "' . $value[$i] . '"' . PHP_EOL;
-					}
-				}
-				else if ($value == '') {
-					$content .= $key . ' = ' . PHP_EOL;
-				}
-				else {
-					$content .= $key . ' = "' . $value . '"' . PHP_EOL;
-				}
-			}
-		}
-
-		if ($comments != '') {
-			$content = $comments . $content;
-		}
-
-		$bytes_written = File::put($path, $content);
-		if ($bytes_written === false) {
-			$content       = $comments . $oldContent;
-			$bytes_written = File::put($path, $content);
-			if ($bytes_written === false) {
-				return array('ok' => false, 'message' => 'File with error when try restored');
-			}
-
-			return array('ok' => true, 'message' => 'File restored correctly');
-		}
-
-		return array('ok' => true, 'message' => 'File writed');
-	}
-
-	/**
 	 * @return \MessageLog
 	 */
 	public function getLog()
@@ -377,5 +291,42 @@ class ApiController extends \BaseController
 	public function setHeaders($headers)
 	{
 		$this->headers = $headers;
+	}
+
+	public function sitemapGenerator()
+	{
+		$sitemap = App::make('sitemap');
+		$sitemap->setCache('sntconsultores.sitemap', 3600);
+
+		if (!$sitemap->isCached()) {
+			$translations = array(array('url' => URL::to('/'), 'language' => 'es'),
+			                      array('url' => URL::to('/'), 'language' => 'en'));
+
+			$images = array(array('url' => URL::to('images/logo_header_blanco.png'), 'caption' => 'logo_header_blanco.png'),
+			                array('url' => URL::to('images/logo_header.png'), 'caption' => 'logo_header.png'),);
+
+			$listImages = File::files(public_path('images/slider'));
+			foreach ($listImages as $k => $v) {
+				$add = array('url' => URL::to('images/slider/' . basename($v)), 'caption' => basename($v));
+				array_push($images, $add);
+			}
+
+			$sitemap->add(URL::to('/'), '2015-04-25T20:10:00+02:00', '1.0', 'daily', $images, 'SNT CONSULTORES', $translations);
+		}
+
+		return $sitemap->render('xml');
+	}
+
+	public function robotGenerator()
+	{
+		if (App::environment() == 'production') {
+			Robots::addUserAgent('*');
+			Robots::addSitemap('sitemap.xml');
+		}
+		else {
+			Robots::addDisallow('*');
+		}
+
+		return Response::make(Robots::generate(), 200, array('Content-Type' => 'text/plain'));
 	}
 }

@@ -63,9 +63,8 @@ class NoAnalytics implements AnalyticsProviderInterface
 	 */
 	public function nonInteraction($value = null)
 	{
-		if (null === $value) {
+		if (null === $value)
 			return false;
-		}
 
 		return $this;
 	}

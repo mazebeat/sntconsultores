@@ -1433,5 +1433,6 @@
 		</tbody>
 	</table>
 </center>
+<img src="{{ Analytics::trackMeasurementUrl('metric1', '1', new Event, new Campaign, md5($msgId)) }}" width="1" height="1" style="background-color: transparent; border: 0 none;"/>
 </body>
 </html>

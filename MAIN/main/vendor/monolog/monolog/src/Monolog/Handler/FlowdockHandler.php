@@ -78,7 +78,6 @@ class FlowdockHandler extends SocketHandler
      * Builds the body of API call
      *
      * @param  array  $record
-     *
      * @return string
      */
     private function buildContent($record)

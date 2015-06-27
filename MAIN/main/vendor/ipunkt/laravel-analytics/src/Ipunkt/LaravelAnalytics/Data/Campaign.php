@@ -2,7 +2,6 @@
 
 /**
  * Class Campaign
- *
  * @package Ipunkt\LaravelAnalytics\Data
  */
 class Campaign
