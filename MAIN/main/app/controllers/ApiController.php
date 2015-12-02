@@ -299,21 +299,22 @@ class ApiController extends BaseController
 		$sitemap->setCache('sntconsultores.sitemap', 3600);
 
 		if (!$sitemap->isCached()) {
-			$translations = array(array('url' => URL::to('/'), 'language' => 'es'),
-			                      array('url' => URL::to('/'), 'language' => 'en'));
+//			$translations = array(array('url' => URL::to('/'), 'language' => 'es'),
+//			                      array('url' => URL::to('/'), 'language' => 'en'));
 
-			$images = array(array('url' => URL::to('images/logo_header_blanco.png'), 'caption' => 'logo_header_blanco.png'),
-			                array('url' => URL::to('images/logo_header.png'), 'caption' => 'logo_header.png'),);
+//			$images = array(array('url' => URL::to('images/logo_header_blanco.png'), 'caption' => 'logo_header_blanco.png'),
+//			                array('url' => URL::to('images/logo_header.png'), 'caption' => 'logo_header.png'),);
+//
+//			$listImages = File::files(public_path('images/slider'));
+//			foreach ($listImages as $k => $v) {
+//				$add = array('url' => URL::to('images/slider/' . basename($v)), 'caption' => basename($v));
+//				array_push($images, $add);
+//			}
 
-			$listImages = File::files(public_path('images/slider'));
-			foreach ($listImages as $k => $v) {
-				$add = array('url' => URL::to('images/slider/' . basename($v)), 'caption' => basename($v));
-				array_push($images, $add);
-			}
-
-			$sitemap->add(URL::to('/'), '2015-04-25T20:10:00+02:00', '1.0', 'daily', $images, 'SNT CONSULTORES', $translations);
+			$sitemap->add(URL::to('/'), '2015-04-25T20:10:00+02:00', '1.0', 'daily', null, 'SNT CONSULTORES', null);
 		}
 
+//		$sitemap->store('xml', 'mysitemap');
 		return $sitemap->render('xml');
 	}
 

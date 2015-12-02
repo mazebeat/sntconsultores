@@ -15,5 +15,5 @@ Route::get('/', 'HomeController@showWelcome');
 Route::get('load/{id}', 'MailController@readmail');
 Route::post('contact', 'MailController@sendmail');
 Route::get('robots.txt', 'ApiController@robotGenerator');
-Route::get('sitemap.xml', 'ApiController@sitemapGenerator');
 Route::get('sitemap', 'ApiController@sitemapGenerator');
+Route::get('sitemap.xml', 'ApiController@sitemapGenerator');

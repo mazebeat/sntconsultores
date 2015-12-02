@@ -14,13 +14,14 @@
 					<h2>P&aacute;gina no encontrada</h2>
 
 					<div class="vidider"></div>
-					<h1 class="clearfix" style="line-height: 55px;">Oops! Sentimos las molestia</h1>
+					<h1 class="" style="line-height: 55px;">Oops! Sentimos las molestia</h1>
+				</div>
+				<div class="clearfix"></div>
+				<div class="text-center column-button" style="margin-top: 20px;">
+					<a class="button" href="{{ URL::to('/') }}">Volver...</a>
 				</div>
 			</div>
 		@endif
-	</div>
-	<div class="w-col w-col-8 w-col-stack column-button">
-		<a class="button" href="#">Discover more</a>
 	</div>
 @endsection
 

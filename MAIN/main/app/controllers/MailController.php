@@ -49,6 +49,7 @@ class MailController extends ApiController
 
 			// Redirect to Home age (Change for ajax submit)
 			return Redirect::to('/');
+			
 		} catch (Exception $e) {
 			$this->getLog()->error('ERROR: ' . $e);
 		}
